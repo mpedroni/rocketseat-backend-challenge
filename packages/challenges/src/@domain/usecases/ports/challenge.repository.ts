@@ -6,7 +6,14 @@ export type ChallengeCreateDto = {
   description: string;
 };
 
+export type ChallengeUpdateDto = {
+  id: string;
+  title: string;
+  description: string;
+};
+
 export interface ChallengeRepository {
   create(data: ChallengeCreateDto): Promise<Challenge>;
-  find(id: string): Promise<Challenge | null>;
+  find(id: string): Promise<Challenge>;
+  update(data: Partial<ChallengeUpdateDto>): Promise<Challenge>;
 }
