@@ -1,38 +1,6 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge-repository';
 import { ChallengeNotFoundError } from './errors/challenge-not-found.error';
-import { ChallengeRepository } from './ports/challenge.repository';
-
-type UpdateChallengeUseCaseInput = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-type UpdateChallengeUseCaseOutput = {
-  id: string;
-  title: string;
-  description: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-class UpdateChallengeUseCase {
-  constructor(private readonly challengeRepository: ChallengeRepository) {}
-
-  async execute(
-    input: Partial<UpdateChallengeUseCaseInput>,
-  ): Promise<UpdateChallengeUseCaseOutput> {
-    const { createdAt, description, id, title } =
-      await this.challengeRepository.update(input);
-    return {
-      createdAt,
-      description,
-      id,
-      title,
-      updatedAt: new Date(),
-    };
-  }
-}
+import { UpdateChallengeUseCase } from './update-challenge.usecase';
 
 function makeSut() {
   const challengeRepository = new InMemoryChallengeRepository();
