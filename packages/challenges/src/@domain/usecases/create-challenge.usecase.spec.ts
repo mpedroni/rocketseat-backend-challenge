@@ -1,21 +1,13 @@
+import { FakeUuidAdapter } from 'src/main/usecases/ports/fake-uuid-adapter';
 import { Challenge } from '../entities/challenge';
 import { CreateChallengeUseCase } from './create-challenge.usecase';
 import { ChallengeIdentifierCollisionError } from './errors/challenge-identifier-collision.error';
-import { ChallengeRepository } from './ports/challenge.repository';
-import { UuidAdapter } from './ports/uuid.adapter';
+import {
+  ChallengeCreateDto,
+  ChallengeRepository,
+} from './ports/challenge.repository';
 
 jest.useFakeTimers({ now: new Date() });
-
-class FakeUuidAdapter implements UuidAdapter {
-  uuid: string;
-  constructor(uuid = 'fake-uuid') {
-    this.uuid = uuid;
-  }
-
-  build(): string {
-    return this.uuid;
-  }
-}
 
 class InMemoryChallengeRepository implements ChallengeRepository {
   private challenges: Challenge[] = [];
@@ -24,7 +16,7 @@ class InMemoryChallengeRepository implements ChallengeRepository {
     const challenge = this.challenges.find((challenge) => challenge.id === id);
     return challenge;
   }
-  async create(data): Promise<Challenge> {
+  async create(data: ChallengeCreateDto): Promise<Challenge> {
     const { id, title, description } = data;
     const challenge = new Challenge({ id, title, description });
     this.challenges.push(challenge);

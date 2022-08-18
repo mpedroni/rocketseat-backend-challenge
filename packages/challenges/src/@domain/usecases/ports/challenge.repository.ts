@@ -8,5 +8,5 @@ export type ChallengeCreateDto = {
 
 export interface ChallengeRepository {
   create(data: ChallengeCreateDto): Promise<Challenge>;
-  find(id: string): Promise<Challenge> | null;
+  find(id: string): Promise<Challenge | null>;
 }
