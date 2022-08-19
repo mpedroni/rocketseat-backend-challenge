@@ -20,19 +20,28 @@ describe('UpdateChallengeUseCase', () => {
       description: 'Fake description',
       title: 'Fake Title',
     };
+    await challengeRepository.create(challenge);
     const changedChallenge = {
       id: challenge.id,
       description: 'Another fake description',
       title: 'Another fake Title',
     };
-    await challengeRepository.create(challenge);
-    const output = await sut.execute(changedChallenge);
+
+    let output = await sut.execute(changedChallenge);
     expect(output.description).toEqual(changedChallenge.description);
     expect(output.title).toEqual(changedChallenge.title);
 
     const repoChallenge = await challengeRepository.find(challenge.id);
     expect(repoChallenge.description).toEqual(changedChallenge.description);
     expect(repoChallenge.title).toEqual(changedChallenge.title);
+
+    output = await sut.execute({
+      description: undefined,
+      title: undefined,
+      id: challenge.id,
+    });
+    expect(output.description).toEqual(changedChallenge.description);
+    expect(output.title).toEqual(changedChallenge.title);
   });
 
   it('should throws an error when try to update an inexistent challenge id', async () => {

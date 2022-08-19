@@ -12,11 +12,7 @@ type ListChallengesUseCaseInput = {
 export class ListChallengesUseCase {
   constructor(private readonly challengeRepository: ChallengeRepository) {}
 
-  async execute({
-    limit = 10,
-    page = 1,
-    query = {},
-  }: ListChallengesUseCaseInput = {}) {
+  async execute({ limit, page, query = {} }: ListChallengesUseCaseInput = {}) {
     return this.challengeRepository.list({ limit, page, query });
   }
 }

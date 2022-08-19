@@ -43,8 +43,13 @@ export class InMemoryChallengeRepository implements ChallengeRepository {
       data;
 
     const updatedChallenge = Object.assign(challenge, { description, title });
-    this.challenges = this.challenges.map((challenge) =>
-      challenge.id === updatedChallenge.id ? updatedChallenge : challenge,
+    const challengeIndex = this.challenges.findIndex(
+      (challenge) => challenge.id === updatedChallenge.id,
+    );
+    this.challenges = this.challenges.splice(
+      challengeIndex,
+      1,
+      updatedChallenge,
     );
     return updatedChallenge;
   }
@@ -60,7 +65,7 @@ export class InMemoryChallengeRepository implements ChallengeRepository {
     limit = 10,
     page = 1,
     query,
-  }: ChallengeListFilters = {}): Promise<ChallengeListOutput> {
+  }: ChallengeListFilters): Promise<ChallengeListOutput> {
     const start = limit * page - limit;
     const end = limit * page;
     const filteredChallenges = this.filterChallenges(query);
