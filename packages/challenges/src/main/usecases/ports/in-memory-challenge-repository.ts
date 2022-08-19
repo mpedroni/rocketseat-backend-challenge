@@ -46,4 +46,11 @@ export class InMemoryChallengeRepository implements ChallengeRepository {
     );
     return updatedChallenge;
   }
+
+  async delete(id: string): Promise<void> {
+    if (!(await this.exists(id))) throw new ChallengeNotFoundError();
+    this.challenges = this.challenges.filter(
+      (challenge) => challenge.id !== id,
+    );
+  }
 }
