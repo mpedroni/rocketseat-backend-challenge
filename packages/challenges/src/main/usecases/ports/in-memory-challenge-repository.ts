@@ -3,6 +3,8 @@ import { ChallengeIdentifierCollisionError } from 'src/@domain/usecases/errors/c
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import {
   ChallengeCreateDto,
+  ChallengeListFilters,
+  ChallengeListOutput,
   ChallengeRepository,
   ChallengeUpdateDto,
 } from 'src/@domain/usecases/ports/challenge.repository';
@@ -51,6 +53,36 @@ export class InMemoryChallengeRepository implements ChallengeRepository {
     if (!(await this.exists(id))) throw new ChallengeNotFoundError();
     this.challenges = this.challenges.filter(
       (challenge) => challenge.id !== id,
+    );
+  }
+
+  async list({
+    limit = 10,
+    page = 1,
+    query,
+  }: ChallengeListFilters = {}): Promise<ChallengeListOutput> {
+    const start = limit * page - limit;
+    const end = limit * page;
+    const filteredChallenges = this.filterChallenges(query);
+    const challenges = filteredChallenges.slice(start, end);
+    const total = this.challenges.length;
+
+    return {
+      page,
+      total,
+      itemsPerPage: limit,
+      results: challenges,
+    };
+  }
+
+  private filterChallenges(query: { title?: string; description?: string }) {
+    let { description = '', title = '' } = query;
+    description = description.toLowerCase();
+    title = title.toLowerCase();
+    return this.challenges.filter(
+      (challenge) =>
+        challenge.description.toLowerCase().includes(description) &&
+        challenge.title.toLowerCase().includes(title),
     );
   }
 }

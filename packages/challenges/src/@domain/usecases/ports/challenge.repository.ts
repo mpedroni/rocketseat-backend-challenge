@@ -12,9 +12,26 @@ export type ChallengeUpdateDto = {
   description: string;
 };
 
+export type ChallengeListFilters = {
+  limit?: number;
+  page?: number;
+  query?: {
+    title?: string;
+    description?: string;
+  };
+};
+
+export type ChallengeListOutput = {
+  results: Challenge[];
+  page: number;
+  itemsPerPage: number;
+  total: number;
+};
+
 export interface ChallengeRepository {
   create(data: ChallengeCreateDto): Promise<Challenge>;
   find(id: string): Promise<Challenge>;
   update(data: Partial<ChallengeUpdateDto>): Promise<Challenge>;
   delete(id: string): Promise<void>;
+  list(filters: ChallengeListFilters): Promise<ChallengeListOutput>;
 }
