@@ -1,4 +1,3 @@
-import { ChallengeIdentifierCollisionError } from './errors/challenge-identifier-collision.error';
 import { ChallengeRepository } from './ports/challenge.repository';
 import { UuidAdapter } from './ports/uuid.adapter';
 
@@ -25,13 +24,9 @@ export class CreateChallengeUseCase {
   ): Promise<CreateChallengeUsecaseOutput> {
     const id = this.uuid.build();
 
-    const isIdAlreadyInUse = !!(await this.challengeRepository.find(id));
-    if (isIdAlreadyInUse) throw new ChallengeIdentifierCollisionError();
-
     const data = {
       ...input,
       id,
-      createdAt: new Date(),
     };
 
     const { description, createdAt, title } =
