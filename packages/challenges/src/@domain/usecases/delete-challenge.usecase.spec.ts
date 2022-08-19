@@ -1,14 +1,6 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge-repository';
+import { DeleteChallengeUseCase } from './delete-challenge.usecase';
 import { ChallengeNotFoundError } from './errors/challenge-not-found.error';
-import { ChallengeRepository } from './ports/challenge.repository';
-
-class DeleteChallengeUseCase {
-  constructor(private readonly challengeRepository: ChallengeRepository) {}
-
-  async execute(id: string): Promise<void> {
-    await this.challengeRepository.delete(id);
-  }
-}
 
 function makeSut() {
   const challengeRepository = new InMemoryChallengeRepository();
