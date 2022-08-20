@@ -31,6 +31,7 @@ export type ChallengeListOutput = {
 export interface ChallengeRepository {
   create(data: ChallengeCreateDto): Promise<Challenge>;
   find(id: string): Promise<Challenge>;
+  exists(id: string): Promise<boolean>;
   update(data: Partial<ChallengeUpdateDto>): Promise<Challenge>;
   delete(id: string): Promise<void>;
   list(filters: ChallengeListFilters): Promise<ChallengeListOutput>;

@@ -28,7 +28,7 @@ export class InMemoryChallengeRepository implements ChallengeRepository {
     return challenge;
   }
 
-  private async exists(id: string) {
+  async exists(id: string) {
     try {
       const challengeExists = !!(await this.find(id));
       return challengeExists;
