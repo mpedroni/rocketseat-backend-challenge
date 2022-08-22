@@ -11,7 +11,13 @@ export type SubmissionCreateDto = {
   grade?: number;
 };
 
+export type SubmissionUpdateDto = {
+  id: string;
+  grade: number;
+};
+
 export interface SubmissionRepository {
   create(dto: SubmissionCreateDto): Promise<Submission>;
   find(id: string): Promise<Submission>;
+  update(dto: SubmissionUpdateDto): Promise<Submission>;
 }

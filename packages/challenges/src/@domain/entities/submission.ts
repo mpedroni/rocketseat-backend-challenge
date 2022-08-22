@@ -9,6 +9,13 @@ type SubmissionProps = {
   grade?: number;
 };
 
+export class InvalidSubmissionGradeError extends Error {
+  constructor() {
+    super("The Submission's grade must be between 0 and 10");
+    this.name = 'InvalidSubmissionGradeError';
+  }
+}
+
 export class Submission {
   private props: SubmissionProps;
 
@@ -50,7 +57,16 @@ export class Submission {
     return this.props.status;
   }
 
+  set status(status: Status) {
+    this.props.status = status;
+  }
+
   get grade(): number | null {
     return this.props.grade;
+  }
+
+  set grade(grade: number) {
+    if (grade < 0 || grade > 10) throw new InvalidSubmissionGradeError();
+    this.props.grade = grade;
   }
 }

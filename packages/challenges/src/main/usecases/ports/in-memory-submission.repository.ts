@@ -3,6 +3,7 @@ import { SubmissionNotFoundError } from 'src/@domain/usecases/errors/submission-
 import {
   SubmissionCreateDto,
   SubmissionRepository,
+  SubmissionUpdateDto,
 } from 'src/@domain/usecases/ports/submission.repository';
 
 export class InMemorySubmissionRepository implements SubmissionRepository {
@@ -37,6 +38,13 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
     );
     if (!submission) throw new SubmissionNotFoundError();
 
+    return submission;
+  }
+
+  async update({ id, grade }: SubmissionUpdateDto): Promise<Submission> {
+    const submission = await this.find(id);
+    submission.grade = grade;
+    submission.status = 'Done';
     return submission;
   }
 }
