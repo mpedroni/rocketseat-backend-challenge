@@ -1,4 +1,4 @@
-import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge-repository';
+import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
 import { Challenge } from '../entities/challenge';
 import { ChallengeNotFoundError } from './errors/challenge-not-found.error';
 import { RetrieveChallengeUseCase } from './retrieve-challenge.usecase';

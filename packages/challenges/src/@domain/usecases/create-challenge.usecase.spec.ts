@@ -1,12 +1,12 @@
-import { FakeUuidAdapter } from 'src/main/usecases/ports/fake-uuid-adapter';
-import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge-repository';
+import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
+import { MockedUuidAdapter } from 'src/main/usecases/ports/mocked-uuid-adapter.adapter';
 import { CreateChallengeUseCase } from './create-challenge.usecase';
 import { ChallengeIdentifierCollisionError } from './errors/challenge-identifier-collision.error';
 
 jest.useFakeTimers({ now: new Date() });
 
 function makeSut() {
-  const uuidBuilder = new FakeUuidAdapter();
+  const uuidBuilder = new MockedUuidAdapter();
   const challengeRepository = new InMemoryChallengeRepository();
   const sut = new CreateChallengeUseCase(challengeRepository, uuidBuilder);
 
