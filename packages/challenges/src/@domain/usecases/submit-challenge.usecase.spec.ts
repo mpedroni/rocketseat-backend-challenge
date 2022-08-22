@@ -75,6 +75,10 @@ type SubmitChallengeUseCaseOutput = {
   grade?: number;
 };
 
+type SubmitChallengeUseCaseValidatedInput = SubmitChallengeUseCaseInput & {
+  error?: Error;
+};
+
 class SubmitChallengeUseCase {
   constructor(
     private readonly submissionRepository: SubmissionRepository,
@@ -86,23 +90,11 @@ class SubmitChallengeUseCase {
   async execute(
     input: SubmitChallengeUseCaseInput,
   ): Promise<SubmitChallengeUseCaseOutput> {
-    let { challenge_id, repository_url } = input;
-    const challengeExists = await this.challengeRepository.exists(challenge_id);
-    const isValidRepositoryUrl = await this.codeRepositoryUrlValidator.validate(
-      repository_url,
+    const { challenge_id, repository_url, error } = await this.validateInput(
+      input,
     );
 
-    let status: SubmissionStatus = 'Pending';
-
-    if (!challengeExists) {
-      status = 'Error';
-      challenge_id = null;
-    }
-
-    if (!isValidRepositoryUrl) {
-      status = 'Error';
-      repository_url = null;
-    }
+    const status: SubmissionStatus = error ? 'Error' : 'Pending';
 
     const submission = await this.submissionRepository.create({
       challenge_id,
@@ -112,9 +104,7 @@ class SubmitChallengeUseCase {
     });
 
     if (status === 'Error') {
-      if (!challenge_id) throw new ChallengeNotFoundError();
-
-      throw new InvalidCodeRepositoryError();
+      throw error;
     }
 
     return {
@@ -124,6 +114,24 @@ class SubmitChallengeUseCase {
       id: submission.id,
       repository_url: submission.repository_url,
       status: submission.status,
+    };
+  }
+
+  private async validateInput({
+    challenge_id,
+    repository_url,
+  }: SubmitChallengeUseCaseInput): Promise<SubmitChallengeUseCaseValidatedInput> {
+    const challengeExists = await this.challengeRepository.exists(challenge_id);
+    const isValidCodeRepositoryUrl =
+      await this.codeRepositoryUrlValidator.validate(repository_url);
+    let error: Error = null;
+
+    if (!isValidCodeRepositoryUrl) error = new InvalidCodeRepositoryError();
+    if (!challengeExists) error = new ChallengeNotFoundError();
+    return {
+      challenge_id: challengeExists ? challenge_id : null,
+      repository_url: isValidCodeRepositoryUrl ? repository_url : null,
+      error,
     };
   }
 }
@@ -274,6 +282,7 @@ describe('SubmitChallengeUseCase', () => {
       challenge_id: 'fake-challenge-id',
       repository_url: 'not-valid-repository-url',
     };
+
     await challengeRepository.create({
       description: 'Fake challenge description',
       title: 'Fake challenge title',
