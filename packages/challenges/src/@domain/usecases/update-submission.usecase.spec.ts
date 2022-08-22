@@ -4,6 +4,7 @@ import {
   InvalidSubmissionGradeError,
   Status as SubmissionStatus,
 } from '../entities/submission';
+import { SubmissionNotFoundError } from './errors/submission-not-found.error';
 import { SubmissionRepository } from './ports/submission.repository';
 
 type UpdateSubmissionUseCaseInput = {
@@ -94,6 +95,25 @@ describe('UpdateSubmissionUseCase', () => {
     input.grade = 11;
     await expect(sut.execute(input)).rejects.toThrowError(
       InvalidSubmissionGradeError,
+    );
+  });
+
+  it("should throw an error if the given Submission doesn't exists", async () => {
+    const challengeRepository = new InMemoryChallengeRepository();
+    await challengeRepository.create({
+      id: 'fake-challenge-id',
+      description: 'Fake challenge description',
+      title: 'Fake Challenge Title',
+    });
+    const submissionRepository = new InMemorySubmissionRepository();
+    const sut = new UpdateSubmissionUseCase(submissionRepository);
+    const input = {
+      submission_id: 'inexistent-submission-id',
+      grade: 10,
+    };
+
+    await expect(sut.execute(input)).rejects.toThrowError(
+      SubmissionNotFoundError,
     );
   });
 });
