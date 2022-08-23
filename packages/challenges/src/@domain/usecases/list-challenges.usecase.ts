@@ -1,4 +1,8 @@
-import { ChallengeRepository } from './ports/challenge.repository';
+import {
+  ChallengeListOutput,
+  ChallengeRepository,
+} from './ports/challenge.repository';
+import { UseCase } from './ports/usecase.adapter';
 
 type ListChallengesUseCaseInput = {
   limit?: number;
@@ -9,7 +13,9 @@ type ListChallengesUseCaseInput = {
   };
 };
 
-export class ListChallengesUseCase {
+export class ListChallengesUseCase
+  implements UseCase<ListChallengesUseCaseInput, ChallengeListOutput>
+{
   constructor(private readonly challengeRepository: ChallengeRepository) {}
 
   async execute({ limit, page, query = {} }: ListChallengesUseCaseInput = {}) {

@@ -4,6 +4,7 @@ import { InvalidCodeRepositoryError } from './errors/invalid-code-repository.err
 import { ChallengeRepository } from './ports/challenge.repository';
 import { CodeRepositoryUrlValidator } from './ports/code-repository-url-validator.adapter';
 import { SubmissionRepository } from './ports/submission.repository';
+import { UseCase } from './ports/usecase.adapter';
 import { UuidAdapter } from './ports/uuid.adapter';
 
 type SubmitChallengeUseCaseInput = {
@@ -24,7 +25,9 @@ type SubmitChallengeUseCaseValidatedInput = SubmitChallengeUseCaseInput & {
   error?: Error;
 };
 
-export class SubmitChallengeUseCase {
+export class SubmitChallengeUseCase
+  implements UseCase<SubmitChallengeUseCaseInput, SubmitChallengeUseCaseOutput>
+{
   constructor(
     private readonly submissionRepository: SubmissionRepository,
     private readonly challengeRepository: ChallengeRepository,

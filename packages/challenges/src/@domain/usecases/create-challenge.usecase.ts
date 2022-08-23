@@ -1,4 +1,5 @@
 import { ChallengeRepository } from './ports/challenge.repository';
+import { UseCase } from './ports/usecase.adapter';
 import { UuidAdapter } from './ports/uuid.adapter';
 
 type CreateChallengeUsecaseInput = {
@@ -13,7 +14,9 @@ type CreateChallengeUsecaseOutput = {
   createdAt: Date;
 };
 
-export class CreateChallengeUseCase {
+export class CreateChallengeUseCase
+  implements UseCase<CreateChallengeUsecaseInput, CreateChallengeUsecaseOutput>
+{
   constructor(
     private challengeRepository: ChallengeRepository,
     private uuid: UuidAdapter,

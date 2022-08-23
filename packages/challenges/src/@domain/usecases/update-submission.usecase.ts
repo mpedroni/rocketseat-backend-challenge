@@ -1,5 +1,6 @@
 import { Status as SubmissionStatus } from '../entities/submission';
 import { SubmissionRepository } from './ports/submission.repository';
+import { UseCase } from './ports/usecase.adapter';
 
 type UpdateSubmissionUseCaseInput = {
   submission_id: string;
@@ -15,7 +16,10 @@ type UpdateSubmissionUseCaseOutput = {
   createdAt: Date;
 };
 
-export class UpdateSubmissionUseCase {
+export class UpdateSubmissionUseCase
+  implements
+    UseCase<UpdateSubmissionUseCaseInput, UpdateSubmissionUseCaseOutput>
+{
   constructor(private readonly submissionRepository: SubmissionRepository) {}
 
   async execute({

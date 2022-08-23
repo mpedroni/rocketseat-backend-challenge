@@ -1,4 +1,5 @@
 import { ChallengeRepository } from './ports/challenge.repository';
+import { UseCase } from './ports/usecase.adapter';
 
 type RetrieveChallengeUseCaseOutput = {
   id: string;
@@ -7,7 +8,9 @@ type RetrieveChallengeUseCaseOutput = {
   createdAt: Date;
 };
 
-export class RetrieveChallengeUseCase {
+export class RetrieveChallengeUseCase
+  implements UseCase<string, RetrieveChallengeUseCaseOutput>
+{
   constructor(private readonly challengeRepository: ChallengeRepository) {}
 
   async execute(id: string): Promise<RetrieveChallengeUseCaseOutput> {
