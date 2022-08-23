@@ -44,21 +44,32 @@ class UpdateSubmissionUseCase {
   }
 }
 
+async function makeSut() {
+  const challengeRepository = new InMemoryChallengeRepository();
+  await challengeRepository.create({
+    id: 'fake-challenge-id',
+    description: 'Fake challenge description',
+    title: 'Fake Challenge Title',
+  });
+  const submissionRepository = new InMemorySubmissionRepository();
+  const sut = new UpdateSubmissionUseCase(submissionRepository);
+
+  return {
+    sut,
+    challengeRepository,
+    submissionRepository,
+  };
+}
+
 describe('UpdateSubmissionUseCase', () => {
   it('should be able to update a Submission', async () => {
-    const challengeRepository = new InMemoryChallengeRepository();
-    await challengeRepository.create({
-      id: 'fake-challenge-id',
-      description: 'Fake challenge description',
-      title: 'Fake Challenge Title',
-    });
-    const submissionRepository = new InMemorySubmissionRepository();
+    const { sut, submissionRepository } = await makeSut();
     await submissionRepository.create({
       id: 'fake-submission-id',
       challenge_id: 'fake-challenge-id',
       repository_url: 'fake-repository-url',
     });
-    const sut = new UpdateSubmissionUseCase(submissionRepository);
+
     const input = {
       submission_id: 'fake-submission-id',
       grade: 9,
@@ -70,19 +81,12 @@ describe('UpdateSubmissionUseCase', () => {
   });
 
   it("should throw an error if the Submission's grade aren't between 0 and 10", async () => {
-    const challengeRepository = new InMemoryChallengeRepository();
-    await challengeRepository.create({
-      id: 'fake-challenge-id',
-      description: 'Fake challenge description',
-      title: 'Fake Challenge Title',
-    });
-    const submissionRepository = new InMemorySubmissionRepository();
+    const { sut, submissionRepository } = await makeSut();
     await submissionRepository.create({
       id: 'fake-submission-id',
       challenge_id: 'fake-challenge-id',
       repository_url: 'fake-repository-url',
     });
-    const sut = new UpdateSubmissionUseCase(submissionRepository);
     const input = {
       submission_id: 'fake-submission-id',
       grade: -1,
@@ -99,14 +103,7 @@ describe('UpdateSubmissionUseCase', () => {
   });
 
   it("should throw an error if the given Submission doesn't exists", async () => {
-    const challengeRepository = new InMemoryChallengeRepository();
-    await challengeRepository.create({
-      id: 'fake-challenge-id',
-      description: 'Fake challenge description',
-      title: 'Fake Challenge Title',
-    });
-    const submissionRepository = new InMemorySubmissionRepository();
-    const sut = new UpdateSubmissionUseCase(submissionRepository);
+    const { sut } = await makeSut();
     const input = {
       submission_id: 'inexistent-submission-id',
       grade: 10,
