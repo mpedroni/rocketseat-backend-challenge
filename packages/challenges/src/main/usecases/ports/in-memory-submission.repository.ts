@@ -13,7 +13,7 @@ import {
 } from 'src/@domain/usecases/ports/submission.repository';
 
 export class InMemorySubmissionRepository implements SubmissionRepository {
-  public submissions: Submission[];
+  private submissions: Submission[];
 
   constructor() {
     this.submissions = [];
@@ -82,6 +82,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
   }: SubmissionListQueryFilter): Promise<Submission[]> {
     const filteredByChallenge = await this.filterSubmissionsByChallenge(
       challenge_id,
+      this.submissions,
     );
     const filteredByStatus = await this.filterSubmissionsByStatus(
       status,
@@ -97,7 +98,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
 
   private async filterSubmissionsByChallenge(
     challenge_id: string,
-    submissions = this.submissions,
+    submissions: Submission[],
   ): Promise<Submission[]> {
     if (!challenge_id) return submissions;
 
@@ -108,7 +109,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
 
   private async filterSubmissionsByStatus(
     status: SubmissionStatus,
-    submissions = this.submissions,
+    submissions: Submission[],
   ): Promise<Submission[]> {
     if (!status) return submissions;
     return submissions.filter((submission) => submission.status === status);
@@ -116,7 +117,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
 
   private async filterSubmissionsByDate(
     date: { start?: Date; end?: Date },
-    submissions = this.submissions,
+    submissions: Submission[],
   ): Promise<Submission[]> {
     if (!date.start && !date.end) return submissions;
     const { start = new Date(), end = new Date() } = date;
