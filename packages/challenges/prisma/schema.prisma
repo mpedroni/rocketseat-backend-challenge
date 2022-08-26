@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Challenge {
+  id          String       @id
+  title       String
+  description String?
+  createdAt   DateTime     @default(now())
+  Submission  Submission[]
+}
+
+model Submission {
+  id            String           @id
+  challenge     Challenge?       @relation(fields: [challengeId], references: [id])
+  challengeId   String?
+  repositoryUrl String?
+  createdAt     DateTime         @default(now())
+  status        SubmissionStatus @default(Pending)
+  grade         Int?
+}
+
+enum SubmissionStatus {
+  Pending
+  Error
+  Done
+}
