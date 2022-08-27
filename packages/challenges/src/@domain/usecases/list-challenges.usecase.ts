@@ -4,7 +4,7 @@ import {
 } from './ports/challenge.repository';
 import { UseCase } from './ports/usecase.adapter';
 
-type ListChallengesUseCaseInput = {
+export type ListChallengesUseCaseInput = {
   limit?: number;
   page?: number;
   query?: {
@@ -12,6 +12,8 @@ type ListChallengesUseCaseInput = {
     description?: string;
   };
 };
+
+export type ListChallengesUseCaseOutput = ChallengeListOutput;
 
 export class ListChallengesUseCase
   implements UseCase<ListChallengesUseCaseInput, ChallengeListOutput>

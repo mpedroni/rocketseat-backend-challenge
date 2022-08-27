@@ -1,4 +1,5 @@
 import { Challenge } from 'src/@domain/entities/challenge';
+import { ChallengeDto } from '../dto/challenge.dto';
 
 export type ChallengeCreateDto = {
   id: string;
@@ -22,7 +23,7 @@ export type ChallengeListFilters = {
 };
 
 export type ChallengeListOutput = {
-  results: Challenge[];
+  results: ChallengeDto[];
   page: number;
   itemsPerPage: number;
   total: number;

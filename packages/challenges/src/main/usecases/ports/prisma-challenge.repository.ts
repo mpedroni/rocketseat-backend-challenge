@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { Challenge } from 'src/@domain/entities/challenge';
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
@@ -40,8 +41,38 @@ export class PrismaChallengeRepository implements ChallengeRepository {
     throw new Error('Method not implemented.');
   }
 
-  async list(filters: ChallengeListFilters): Promise<ChallengeListOutput> {
-    throw new Error('Method not implemented.');
+  async list({
+    limit = 10,
+    page = 1,
+    query = {},
+  }: ChallengeListFilters): Promise<ChallengeListOutput> {
+    const skip = (page - 1) * limit;
+    const take = limit;
+    const { description, title } = query;
+    const where: Prisma.ChallengeWhereInput = {
+      description: {
+        contains: description,
+        mode: 'insensitive',
+      },
+      title: {
+        contains: title,
+        mode: 'insensitive',
+      },
+    };
+
+    const total = await this.prisma.challenge.count({ where });
+    const results = await this.prisma.challenge.findMany({
+      skip,
+      take,
+      where,
+    });
+
+    return {
+      itemsPerPage: limit,
+      page,
+      results,
+      total,
+    };
   }
 
   async delete(id: string): Promise<void> {

@@ -3,6 +3,8 @@ import { UserInputError } from 'apollo-server-express';
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import { ChallengeService } from './challenges.service';
 import { CreateChallengeInput } from './dto/create-challenge.input';
+import { ListChallengesArgs } from './dto/list-challenges.args';
+import { ListChallengesOutput } from './dto/list-challenges.output';
 import { Challenge } from './models/challenge.model';
 
 @Resolver((of) => Challenge)
@@ -12,6 +14,22 @@ export class ChallengeResolver {
   @Query((returns) => Challenge)
   async challenge(@Args('id') id: string): Promise<void> {
     return;
+  }
+
+  @Query((returns) => ListChallengesOutput)
+  async challenges(
+    @Args() args: ListChallengesArgs,
+  ): Promise<ListChallengesOutput> {
+    const { description, title, limit, page } = args;
+    const filters = {
+      page,
+      limit,
+      query: {
+        description,
+        title,
+      },
+    };
+    return await this.challengeService.list(filters);
   }
 
   @Mutation((returns) => Challenge)
