@@ -5,8 +5,8 @@ import { UuidAdapter } from 'src/@domain/usecases/ports/uuid.adapter';
 import { PrismaChallengeRepository } from 'src/main/usecases/ports/prisma-challenge.repository';
 import { PrismaService } from 'src/prisma.service';
 import { UuidAdapterV4 } from 'src/uuid.service';
-import { ChallengeResolver } from './challenge.resolver';
-import { ChallengeService } from './challenge.service';
+import { ChallengeResolver } from './challenges.resolver';
+import { ChallengeService } from './challenges.service';
 
 @Module({
   imports: [],

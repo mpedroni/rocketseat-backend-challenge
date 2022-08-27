@@ -2,7 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { ChallengeModule } from './modules/challenges/challenge.module';
+import { ChallengeModule } from './modules/challenges/challenges.module';
 
 @Module({
   imports: [
