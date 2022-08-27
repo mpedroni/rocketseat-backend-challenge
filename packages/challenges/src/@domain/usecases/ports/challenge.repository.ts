@@ -9,8 +9,8 @@ export type ChallengeCreateDto = {
 
 export type ChallengeUpdateDto = {
   id: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 };
 
 export type ChallengeListFilters = {
@@ -33,7 +33,7 @@ export interface ChallengeRepository {
   create(data: ChallengeCreateDto): Promise<Challenge>;
   find(id: string): Promise<Challenge>;
   exists(id: string): Promise<boolean>;
-  update(data: Partial<ChallengeUpdateDto>): Promise<Challenge>;
+  update(data: ChallengeUpdateDto): Promise<Challenge>;
   delete(id: string): Promise<void>;
   list(filters: ChallengeListFilters): Promise<ChallengeListOutput>;
 }

@@ -1,19 +1,14 @@
+import { ChallengeDto } from './dto/challenge.dto';
 import { ChallengeRepository } from './ports/challenge.repository';
 import { UseCase } from './ports/usecase.adapter';
 
-type UpdateChallengeUseCaseInput = {
+export type UpdateChallengeUseCaseInput = {
   id: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 };
 
-type UpdateChallengeUseCaseOutput = {
-  id: string;
-  title: string;
-  description: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+export type UpdateChallengeUseCaseOutput = ChallengeDto;
 
 export class UpdateChallengeUseCase
   implements UseCase<UpdateChallengeUseCaseInput, UpdateChallengeUseCaseOutput>
@@ -21,16 +16,16 @@ export class UpdateChallengeUseCase
   constructor(private readonly challengeRepository: ChallengeRepository) {}
 
   async execute(
-    input: Partial<UpdateChallengeUseCaseInput>,
+    input: UpdateChallengeUseCaseInput,
   ): Promise<UpdateChallengeUseCaseOutput> {
     const { createdAt, description, id, title } =
       await this.challengeRepository.update(input);
+
     return {
       createdAt,
       description,
       id,
       title,
-      updatedAt: new Date(),
     };
   }
 }
