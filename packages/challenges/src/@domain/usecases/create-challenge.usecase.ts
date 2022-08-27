@@ -2,12 +2,12 @@ import { ChallengeRepository } from './ports/challenge.repository';
 import { UseCase } from './ports/usecase.adapter';
 import { UuidAdapter } from './ports/uuid.adapter';
 
-type CreateChallengeUsecaseInput = {
+export type CreateChallengeUsecaseInput = {
   title: string;
   description: string;
 };
 
-type CreateChallengeUsecaseOutput = {
+export type CreateChallengeUsecaseOutput = {
   id: string;
   title: string;
   description: string;
