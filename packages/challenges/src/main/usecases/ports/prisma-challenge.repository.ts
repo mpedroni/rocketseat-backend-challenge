@@ -39,11 +39,29 @@ export class PrismaChallengeRepository implements ChallengeRepository {
   }
 
   async exists(id: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    const challenge = await this.prisma.challenge.findFirst({
+      where: { id },
+    });
+
+    return !!challenge;
   }
 
-  async update(data: Partial<ChallengeUpdateDto>): Promise<Challenge> {
-    throw new Error('Method not implemented.');
+  async update(data: ChallengeUpdateDto): Promise<Challenge> {
+    const { id, description, title } = data;
+
+    if (!(await this.exists(id))) throw new ChallengeNotFoundError();
+
+    const challenge = await this.prisma.challenge.update({
+      where: {
+        id,
+      },
+      data: {
+        description,
+        title,
+      },
+    });
+
+    return new Challenge({ ...challenge });
   }
 
   async find(id: string): Promise<Challenge> {
