@@ -1,12 +1,8 @@
+import { ChallengeDto } from './dto/challenge.dto';
 import { ChallengeRepository } from './ports/challenge.repository';
 import { UseCase } from './ports/usecase.adapter';
 
-type RetrieveChallengeUseCaseOutput = {
-  id: string;
-  title: string;
-  description: string;
-  createdAt: Date;
-};
+export type RetrieveChallengeUseCaseOutput = ChallengeDto;
 
 export class RetrieveChallengeUseCase
   implements UseCase<string, RetrieveChallengeUseCaseOutput>

@@ -10,6 +10,10 @@ import {
   ListChallengesUseCaseInput,
   ListChallengesUseCaseOutput,
 } from 'src/@domain/usecases/list-challenges.usecase';
+import {
+  RetrieveChallengeUseCase,
+  RetrieveChallengeUseCaseOutput,
+} from 'src/@domain/usecases/retrieve-challenge.usecase';
 
 @Injectable()
 export class ChallengeService {
@@ -17,6 +21,7 @@ export class ChallengeService {
     private readonly createChallengeUseCase: CreateChallengeUseCase,
     private readonly deleteChallengeUseCase: DeleteChallengeUseCase,
     private readonly listChallengesUseCase: ListChallengesUseCase,
+    private readonly retrieveChallengeUseCase: RetrieveChallengeUseCase,
   ) {}
 
   async create(
@@ -34,5 +39,9 @@ export class ChallengeService {
     filters: ListChallengesUseCaseInput,
   ): Promise<ListChallengesUseCaseOutput> {
     return await this.listChallengesUseCase.execute(filters);
+  }
+
+  async retrieve(id: string): Promise<RetrieveChallengeUseCaseOutput> {
+    return await this.retrieveChallengeUseCase.execute(id);
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { Challenge } from 'src/@domain/entities/challenge';
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import {
@@ -11,6 +10,16 @@ import {
   ChallengeUpdateDto,
 } from 'src/@domain/usecases/ports/challenge.repository';
 import { PrismaService } from 'src/prisma.service';
+
+function handleError(error: Error): Error {
+  if (
+    error instanceof Prisma.PrismaClientKnownRequestError ||
+    error instanceof Prisma.NotFoundError
+  ) {
+    throw new ChallengeNotFoundError();
+  }
+  throw error;
+}
 
 @Injectable()
 export class PrismaChallengeRepository implements ChallengeRepository {
@@ -38,7 +47,15 @@ export class PrismaChallengeRepository implements ChallengeRepository {
   }
 
   async find(id: string): Promise<Challenge> {
-    throw new Error('Method not implemented.');
+    try {
+      const challenge = await this.prisma.challenge.findUniqueOrThrow({
+        where: { id },
+      });
+
+      return new Challenge({ ...challenge });
+    } catch (error) {
+      handleError(error);
+    }
   }
 
   async list({
@@ -81,10 +98,7 @@ export class PrismaChallengeRepository implements ChallengeRepository {
         where: { id },
       });
     } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError) {
-        throw new ChallengeNotFoundError();
-      }
-      throw error;
+      handleError(error);
     }
   }
 }

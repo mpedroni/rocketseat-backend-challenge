@@ -4,6 +4,7 @@ import { DeleteChallengeUseCase } from 'src/@domain/usecases/delete-challenge.us
 import { ListChallengesUseCase } from 'src/@domain/usecases/list-challenges.usecase';
 import { ChallengeRepository } from 'src/@domain/usecases/ports/challenge.repository';
 import { UuidAdapter } from 'src/@domain/usecases/ports/uuid.adapter';
+import { RetrieveChallengeUseCase } from 'src/@domain/usecases/retrieve-challenge.usecase';
 import { PrismaChallengeRepository } from 'src/main/usecases/ports/prisma-challenge.repository';
 import { PrismaService } from 'src/prisma.service';
 import { UuidAdapterV4 } from 'src/uuid.service';
@@ -46,6 +47,13 @@ import { ChallengeService } from './challenges.service';
       provide: ListChallengesUseCase,
       useFactory: (challengeRepository: ChallengeRepository) => {
         return new ListChallengesUseCase(challengeRepository);
+      },
+      inject: ['ChallengeRepository'],
+    },
+    {
+      provide: RetrieveChallengeUseCase,
+      useFactory: (challengeRepository: ChallengeRepository) => {
+        return new RetrieveChallengeUseCase(challengeRepository);
       },
       inject: ['ChallengeRepository'],
     },

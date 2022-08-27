@@ -12,8 +12,15 @@ export class ChallengeResolver {
   constructor(private readonly challengeService: ChallengeService) {}
 
   @Query((returns) => Challenge)
-  async challenge(@Args('id') id: string): Promise<void> {
-    return;
+  async challenge(@Args('id') id: string): Promise<Challenge> {
+    try {
+      const challenge = await this.challengeService.retrieve(id);
+      return challenge;
+    } catch (error) {
+      if (error instanceof ChallengeNotFoundError) {
+        throw new UserInputError(error.message);
+      }
+    }
   }
 
   @Query((returns) => ListChallengesOutput)
