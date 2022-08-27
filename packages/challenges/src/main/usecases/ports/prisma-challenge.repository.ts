@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { Challenge } from 'src/@domain/entities/challenge';
+import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import {
   ChallengeCreateDto,
   ChallengeListFilters,
@@ -43,6 +45,15 @@ export class PrismaChallengeRepository implements ChallengeRepository {
   }
 
   async delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      await this.prisma.challenge.delete({
+        where: { id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        throw new ChallengeNotFoundError();
+      }
+      throw error;
+    }
   }
 }
