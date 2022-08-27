@@ -5,6 +5,7 @@ import { ListChallengesUseCase } from 'src/@domain/usecases/list-challenges.usec
 import { ChallengeRepository } from 'src/@domain/usecases/ports/challenge.repository';
 import { UuidAdapter } from 'src/@domain/usecases/ports/uuid.adapter';
 import { RetrieveChallengeUseCase } from 'src/@domain/usecases/retrieve-challenge.usecase';
+import { UpdateChallengeUseCase } from 'src/@domain/usecases/update-challenge.usecase';
 import { PrismaChallengeRepository } from 'src/main/usecases/ports/prisma-challenge.repository';
 import { PrismaService } from 'src/prisma.service';
 import { UuidAdapterV4 } from 'src/uuid.service';
@@ -54,6 +55,13 @@ import { ChallengeService } from './challenges.service';
       provide: RetrieveChallengeUseCase,
       useFactory: (challengeRepository: ChallengeRepository) => {
         return new RetrieveChallengeUseCase(challengeRepository);
+      },
+      inject: ['ChallengeRepository'],
+    },
+    {
+      provide: UpdateChallengeUseCase,
+      useFactory: (challengeRepository: ChallengeRepository) => {
+        return new UpdateChallengeUseCase(challengeRepository);
       },
       inject: ['ChallengeRepository'],
     },

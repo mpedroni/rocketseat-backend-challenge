@@ -5,6 +5,7 @@ import { ChallengeService } from './challenges.service';
 import { CreateChallengeInput } from './dto/create-challenge.input';
 import { ListChallengesArgs } from './dto/list-challenges.args';
 import { ListChallengesOutput } from './dto/list-challenges.output';
+import { UpdateChallengeInput } from './dto/update-challenge.input';
 import { Challenge } from './models/challenge.model';
 
 @Resolver((of) => Challenge)
@@ -52,6 +53,24 @@ export class ChallengeResolver {
     try {
       await this.challengeService.delete(id);
       return id;
+    } catch (error) {
+      if (error instanceof ChallengeNotFoundError) {
+        throw new UserInputError(error.message);
+      }
+    }
+  }
+
+  @Mutation((returns) => Challenge)
+  async updateChallenge(
+    @Args('id') id: string,
+    @Args('updateChallengeInput') updateChallengeInput: UpdateChallengeInput,
+  ): Promise<Challenge> {
+    try {
+      const challenge = await this.challengeService.update({
+        id,
+        ...updateChallengeInput,
+      });
+      return challenge;
     } catch (error) {
       if (error instanceof ChallengeNotFoundError) {
         throw new UserInputError(error.message);
