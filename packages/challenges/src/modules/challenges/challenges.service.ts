@@ -15,6 +15,11 @@ import {
   RetrieveChallengeUseCaseOutput,
 } from 'src/@domain/usecases/retrieve-challenge.usecase';
 import {
+  SubmitChallengeUseCase,
+  SubmitChallengeUseCaseInput,
+  SubmitChallengeUseCaseOutput,
+} from 'src/@domain/usecases/submit-challenge.usecase';
+import {
   UpdateChallengeUseCase,
   UpdateChallengeUseCaseInput,
   UpdateChallengeUseCaseOutput,
@@ -28,6 +33,7 @@ export class ChallengeService {
     private readonly listChallengesUseCase: ListChallengesUseCase,
     private readonly retrieveChallengeUseCase: RetrieveChallengeUseCase,
     private readonly updateChallengeUseCase: UpdateChallengeUseCase,
+    private readonly submitChallengeUseCase: SubmitChallengeUseCase,
   ) {}
 
   async create(
@@ -56,5 +62,12 @@ export class ChallengeService {
   ): Promise<UpdateChallengeUseCaseOutput> {
     const challenge = await this.updateChallengeUseCase.execute(input);
     return challenge;
+  }
+
+  async submit(
+    input: SubmitChallengeUseCaseInput,
+  ): Promise<SubmitChallengeUseCaseOutput> {
+    const submission = await this.submitChallengeUseCase.execute(input);
+    return submission;
   }
 }
