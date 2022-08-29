@@ -3,6 +3,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { CreateChallengeUseCase } from 'src/@domain/usecases/create-challenge.usecase';
 import { DeleteChallengeUseCase } from 'src/@domain/usecases/delete-challenge.usecase';
 import { ListChallengesUseCase } from 'src/@domain/usecases/list-challenges.usecase';
+import { ListSubmissionsUseCase } from 'src/@domain/usecases/list-submissions.usecase';
 import { ChallengeRepository } from 'src/@domain/usecases/ports/challenge.repository';
 import { CodeRepositoryUrlValidator } from 'src/@domain/usecases/ports/code-repository-url-validator.adapter';
 import { SubmissionRepository } from 'src/@domain/usecases/ports/submission.repository';
@@ -122,6 +123,13 @@ import { ChallengeService } from './challenges.service';
       provide: UpdateSubmissionUseCase,
       useFactory: (submissionRepository: SubmissionRepository) => {
         return new UpdateSubmissionUseCase(submissionRepository);
+      },
+      inject: ['SubmissionRepository'],
+    },
+    {
+      provide: ListSubmissionsUseCase,
+      useFactory: (submissionRepository: SubmissionRepository) => {
+        return new ListSubmissionsUseCase(submissionRepository);
       },
       inject: ['SubmissionRepository'],
     },

@@ -17,6 +17,11 @@ import {
   ListChallengesUseCaseOutput,
 } from 'src/@domain/usecases/list-challenges.usecase';
 import {
+  ListSubmissionsUseCase,
+  ListSubmissionsUseCaseInput,
+  ListSubmissionsUseCaseOutput,
+} from 'src/@domain/usecases/list-submissions.usecase';
+import {
   RetrieveChallengeUseCase,
   RetrieveChallengeUseCaseOutput,
 } from 'src/@domain/usecases/retrieve-challenge.usecase';
@@ -54,6 +59,7 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
     private readonly updateChallengeUseCase: UpdateChallengeUseCase,
     private readonly submitChallengeUseCase: SubmitChallengeUseCase,
     private readonly updateSubmissionUseCase: UpdateSubmissionUseCase,
+    private readonly listSubmissionsUseCase: ListSubmissionsUseCase,
   ) {}
 
   async onModuleInit() {
@@ -122,5 +128,11 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
     }
 
     return submission;
+  }
+
+  async listSubmissions(
+    filters: ListSubmissionsUseCaseInput,
+  ): Promise<ListSubmissionsUseCaseOutput> {
+    return await this.listSubmissionsUseCase.execute(filters);
   }
 }

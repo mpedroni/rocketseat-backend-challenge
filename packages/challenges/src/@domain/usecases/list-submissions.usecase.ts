@@ -5,13 +5,13 @@ import {
 } from './ports/submission.repository';
 import { UseCase } from './ports/usecase.adapter';
 
-type ListSubmissionsUseCaseInput = {
+export type ListSubmissionsUseCaseInput = {
   limit?: number;
   page?: number;
   query?: SubmissionListQueryFilter;
 };
 
-type ListSubmissionsUseCaseOutput = SubmissionListOutput;
+export type ListSubmissionsUseCaseOutput = SubmissionListOutput;
 
 export class ListSubmissionsUseCase
   implements UseCase<ListSubmissionsUseCaseInput, ListSubmissionsUseCaseOutput>

@@ -1,12 +1,15 @@
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { UserInputError } from 'apollo-server-express';
-import { Status } from 'src/@domain/entities/submission';
+import { Status as SubmissionStatus } from 'src/@domain/entities/submission';
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import { InvalidCodeRepositoryError } from 'src/@domain/usecases/errors/invalid-code-repository.error';
+import { ListSubmissionsUseCaseInput } from 'src/@domain/usecases/list-submissions.usecase';
 import { ChallengeService } from './challenges.service';
 import { CreateChallengeInput } from './dto/create-challenge.input';
 import { ListChallengesArgs } from './dto/list-challenges.args';
 import { ListChallengesOutput } from './dto/list-challenges.output';
+import { ListSubmissionsArgs } from './dto/list-submissions.args';
+import { ListSubmissionsOutput } from './dto/list-submissions.output';
 import { SubmitChallengeInput } from './dto/submit-challenge.input';
 import { UpdateChallengeInput } from './dto/update-challenge.input';
 import { Challenge } from './models/challenge.model';
@@ -102,7 +105,7 @@ export class ChallengeResolver {
         });
       const challenge = await this.challengeService.retrieve(challenge_id);
 
-      const translatedStatus: Record<Status, StatusModel> = {
+      const translatedStatus: Record<SubmissionStatus, StatusModel> = {
         Pending: StatusModel.Pending,
         Error: StatusModel.Error,
         Done: StatusModel.Done,
@@ -125,5 +128,55 @@ export class ChallengeResolver {
     } catch (error) {
       handleError(error);
     }
+  }
+
+  @Query((returns) => ListSubmissionsOutput)
+  async submissions(
+    @Args() args: ListSubmissionsArgs,
+  ): Promise<ListSubmissionsOutput> {
+    const { challenge_id, date = {}, status, limit, page } = args;
+
+    const translatedStatus: Record<StatusModel, SubmissionStatus> = {
+      [StatusModel.Done]: 'Done',
+      [StatusModel.Error]: 'Error',
+      [StatusModel.Pending]: 'Pending',
+    };
+
+    const filters: ListSubmissionsUseCaseInput = {
+      page,
+      limit,
+      query: {
+        challenge_id,
+        date,
+        status: translatedStatus[status],
+      },
+    };
+    const output = await this.challengeService.listSubmissions(filters);
+    return {
+      itemsPerPage: output.itemsPerPage,
+      page: output.page,
+      total: output.total,
+      results: output.results.map<Submission>(
+        ({ challenge_id, createdAt, grade, id, repository_url, status }) => ({
+          createdAt,
+          grade,
+          id,
+          status:
+            status === 'Done'
+              ? StatusModel.Done
+              : status === 'Error'
+              ? StatusModel.Error
+              : StatusModel.Pending,
+          challenge: {
+            createdAt: new Date(),
+            description: 'Description',
+            id: 'uuid',
+            title: 'Title',
+          },
+          challenge_id,
+          repository_url,
+        }),
+      ),
+    };
   }
 }

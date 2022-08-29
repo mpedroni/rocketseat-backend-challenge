@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { Submission } from 'src/@domain/entities/submission';
 import {
   SubmissionCreateDto,
@@ -51,7 +52,40 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
       status: submission.status,
     });
   }
-  list(filters: SubmissionListFilters): Promise<SubmissionListOutput> {
-    throw new Error('Method not implemented.');
+
+  async list(filters: SubmissionListFilters): Promise<SubmissionListOutput> {
+    const { limit = 10, page = 1, query = {} } = filters;
+    const { challenge_id, date, status } = query;
+    const { start, end } = date;
+    const createdAtFilter: Prisma.DateTimeFilter = {
+      gte: isNaN(Number(start)) ? undefined : start,
+      lte: isNaN(Number(end)) ? undefined : end,
+    };
+
+    const where: Prisma.SubmissionWhereInput = {
+      createdAt: createdAtFilter,
+      status,
+    };
+
+    if (!!challenge_id) where.challenge_id = challenge_id;
+
+    const submissions = await this.prisma.submission.findMany({
+      where,
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+    const total = await this.prisma.submission.count({
+      where,
+    });
+
+    return {
+      itemsPerPage: limit,
+      page,
+      results: submissions.map(
+        (submission) =>
+          new Submission({ ...submission, created_at: submission.createdAt }),
+      ),
+      total,
+    };
   }
 }
