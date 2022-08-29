@@ -19,7 +19,7 @@ export class GitHubCodeRepositoryUrlValidator
 
   private getUserAndRepo(repository_url: string): RepositoryData | null {
     const githubUrlRegexPattern = new RegExp(
-      /^(http(s)?:\/\/)(github\.com\/)(?<user>\w+)(\/)(?<repo>\w+)(\/)?$/,
+      /^(http(s)?:\/\/)(github\.com\/)(?<user>\w+)(\/)(?<repo>[^\s]+)(\/)?$/,
     );
     const result = repository_url.match(githubUrlRegexPattern);
     if (!result) return null;
