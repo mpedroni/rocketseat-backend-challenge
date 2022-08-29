@@ -15,6 +15,7 @@ export type SubmissionCreateDto = {
 export type SubmissionUpdateDto = {
   id: string;
   grade: number;
+  status: SubmissionStatus;
 };
 
 export type SubmissionListFilters = {

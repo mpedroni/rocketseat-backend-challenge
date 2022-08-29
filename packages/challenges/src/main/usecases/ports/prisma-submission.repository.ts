@@ -33,12 +33,12 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
   }
 
   async update(dto: SubmissionUpdateDto): Promise<Submission> {
-    const { grade, id } = dto;
+    const { grade, id, status } = dto;
     const submission = await this.prisma.submission.update({
       where: { id },
       data: {
         grade,
-        status: 'Done',
+        status,
       },
     });
 

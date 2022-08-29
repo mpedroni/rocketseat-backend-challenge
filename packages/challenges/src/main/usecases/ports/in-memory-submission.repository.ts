@@ -49,10 +49,14 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
     return submission;
   }
 
-  async update({ id, grade }: SubmissionUpdateDto): Promise<Submission> {
+  async update({
+    id,
+    grade,
+    status,
+  }: SubmissionUpdateDto): Promise<Submission> {
     const submission = await this.find(id);
     submission.grade = grade;
-    submission.status = 'Done';
+    submission.status = status;
     return submission;
   }
 

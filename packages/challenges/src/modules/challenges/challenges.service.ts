@@ -65,7 +65,7 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
     await this.client.close();
   }
 
-  correct(message: CorrectLessonMessage): void {
+  private correct(message: CorrectLessonMessage): void {
     const observer = this.client.send<CorrectLessonResponse>(
       'challenge.correction',
       message,
@@ -74,7 +74,7 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
       next: (correction: CorrectLessonResponse) => {
         const { submissionId, grade, status } = correction;
         this.updateSubmissionUseCase.execute({
-          grade,
+          grade: status === 'Error' ? null : grade,
           submission_id: submissionId,
         });
       },

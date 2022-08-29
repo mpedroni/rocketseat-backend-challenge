@@ -28,6 +28,7 @@ export class UpdateSubmissionUseCase
   }: UpdateSubmissionUseCaseInput): Promise<UpdateSubmissionUseCaseOutput> {
     const submission = await this.submissionRepository.update({
       grade,
+      status: !!grade || grade === 0 ? 'Done' : 'Error',
       id: submission_id,
     });
 
