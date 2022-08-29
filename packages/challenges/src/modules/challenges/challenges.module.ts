@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { CreateChallengeUseCase } from 'src/@domain/usecases/create-challenge.usecase';
 import { DeleteChallengeUseCase } from 'src/@domain/usecases/delete-challenge.usecase';
 import { ListChallengesUseCase } from 'src/@domain/usecases/list-challenges.usecase';
@@ -9,6 +10,7 @@ import { UuidAdapter } from 'src/@domain/usecases/ports/uuid.adapter';
 import { RetrieveChallengeUseCase } from 'src/@domain/usecases/retrieve-challenge.usecase';
 import { SubmitChallengeUseCase } from 'src/@domain/usecases/submit-challenge.usecase';
 import { UpdateChallengeUseCase } from 'src/@domain/usecases/update-challenge.usecase';
+import { UpdateSubmissionUseCase } from 'src/@domain/usecases/update-submission.usecase';
 import { GitHubCodeRepositoryUrlValidator } from 'src/main/usecases/ports/github-code-repository-url-validator.adapter';
 import { PrismaChallengeRepository } from 'src/main/usecases/ports/prisma-challenge.repository';
 import { PrismaSubmissionRepository } from 'src/main/usecases/ports/prisma-submission.repository';
@@ -18,7 +20,23 @@ import { ChallengeResolver } from './challenges.resolver';
 import { ChallengeService } from './challenges.service';
 
 @Module({
-  imports: [],
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'KafkaService',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'challenges-service',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'challenge-consumer',
+          },
+        },
+      },
+    ]),
+  ],
   controllers: [],
   providers: [
     ChallengeResolver,
@@ -99,6 +117,13 @@ import { ChallengeService } from './challenges.service';
         'CodeRepositoryUrlValidator',
         'UuidAdapter',
       ],
+    },
+    {
+      provide: UpdateSubmissionUseCase,
+      useFactory: (submissionRepository: SubmissionRepository) => {
+        return new UpdateSubmissionUseCase(submissionRepository);
+      },
+      inject: ['SubmissionRepository'],
     },
   ],
 })

@@ -31,8 +31,25 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
   find(id: string): Promise<Submission> {
     throw new Error('Method not implemented.');
   }
-  update(dto: SubmissionUpdateDto): Promise<Submission> {
-    throw new Error('Method not implemented.');
+
+  async update(dto: SubmissionUpdateDto): Promise<Submission> {
+    const { grade, id } = dto;
+    const submission = await this.prisma.submission.update({
+      where: { id },
+      data: {
+        grade,
+        status: 'Done',
+      },
+    });
+
+    return new Submission({
+      challenge_id: submission.challenge_id,
+      created_at: submission.createdAt,
+      grade: submission.grade,
+      id: submission.id,
+      repository_url: submission.repository_url,
+      status: submission.status,
+    });
   }
   list(filters: SubmissionListFilters): Promise<SubmissionListOutput> {
     throw new Error('Method not implemented.');
