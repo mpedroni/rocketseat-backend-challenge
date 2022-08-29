@@ -1,4 +1,5 @@
 import { Status as SubmissionStatus } from '../entities/submission';
+import { SubmissionDto } from './dto/submission.dto';
 import { ChallengeNotFoundError } from './errors/challenge-not-found.error';
 import { InvalidCodeRepositoryError } from './errors/invalid-code-repository.error';
 import { ChallengeRepository } from './ports/challenge.repository';
@@ -7,19 +8,12 @@ import { SubmissionRepository } from './ports/submission.repository';
 import { UseCase } from './ports/usecase.adapter';
 import { UuidAdapter } from './ports/uuid.adapter';
 
-type SubmitChallengeUseCaseInput = {
+export type SubmitChallengeUseCaseInput = {
   challenge_id: string;
   repository_url: string;
 };
 
-type SubmitChallengeUseCaseOutput = {
-  id: string;
-  challenge_id: string;
-  repository_url: string;
-  createdAt: Date;
-  status: SubmissionStatus;
-  grade?: number;
-};
+export type SubmitChallengeUseCaseOutput = SubmissionDto;
 
 type SubmitChallengeUseCaseValidatedInput = SubmitChallengeUseCaseInput & {
   error?: Error;
