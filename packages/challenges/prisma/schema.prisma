@@ -19,13 +19,13 @@ model Challenge {
 }
 
 model Submission {
-  id            String           @id
-  challenge     Challenge?       @relation(fields: [challengeId], references: [id])
-  challengeId   String?
-  repositoryUrl String?
-  createdAt     DateTime         @default(now())
-  status        SubmissionStatus @default(Pending)
-  grade         Int?
+  id             String           @id
+  challenge      Challenge?       @relation(fields: [challenge_id], references: [id])
+  challenge_id   String?
+  repository_url String?
+  createdAt      DateTime         @default(now())
+  status         SubmissionStatus @default(Pending)
+  grade          Int?
 }
 
 enum SubmissionStatus {
