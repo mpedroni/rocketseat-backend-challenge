@@ -1,4 +1,4 @@
-import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
+import { InMemoryChallengeRepository } from 'src/@core/main/application/ports/in-memory-challenge.repository';
 import { ListChallengesUseCase } from '../list-challenges.usecase';
 
 function makeSut() {

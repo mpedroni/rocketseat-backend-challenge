@@ -1,5 +1,5 @@
-import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
-import { MockedUuidAdapter } from 'src/main/usecases/ports/mocked-uuid-adapter.adapter';
+import { InMemoryChallengeRepository } from 'src/@core/main/application/ports/in-memory-challenge.repository';
+import { MockedUuidAdapter } from 'src/@core/main/application/ports/mocked-uuid-adapter.adapter';
 import { CreateChallengeUseCase } from '../create-challenge.usecase';
 import { ChallengeIdentifierCollisionError } from '../../errors/challenge-identifier-collision.error';
 

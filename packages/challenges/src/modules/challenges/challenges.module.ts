@@ -12,9 +12,9 @@ import { RetrieveChallengeUseCase } from 'src/@core/application/usecases/retriev
 import { SubmitChallengeUseCase } from 'src/@core/application/usecases/submit-challenge.usecase';
 import { UpdateChallengeUseCase } from 'src/@core/application/usecases/update-challenge.usecase';
 import { UpdateSubmissionUseCase } from 'src/@core/application/usecases/update-submission.usecase';
-import { GitHubCodeRepositoryUrlValidator } from 'src/main/usecases/ports/github-code-repository-url-validator.adapter';
-import { PrismaChallengeRepository } from 'src/main/usecases/ports/prisma-challenge.repository';
-import { PrismaSubmissionRepository } from 'src/main/usecases/ports/prisma-submission.repository';
+import { GitHubCodeRepositoryUrlValidator } from 'src/@core/main/application/ports/github-code-repository-url-validator.adapter';
+import { PrismaChallengeRepository } from 'src/@core/main/application/ports/prisma-challenge.repository';
+import { PrismaSubmissionRepository } from 'src/@core/main/application/ports/prisma-submission.repository';
 import { PrismaService } from 'src/prisma.service';
 import { UuidAdapterV4 } from 'src/uuid.service';
 import { ChallengeResolver } from './challenges.resolver';

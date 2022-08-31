@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
-import { InMemorySubmissionRepository } from 'src/main/usecases/ports/in-memory-submission.repository';
+import { InMemoryChallengeRepository } from 'src/@core/main/application/ports/in-memory-challenge.repository';
+import { InMemorySubmissionRepository } from 'src/@core/main/application/ports/in-memory-submission.repository';
 import { ChallengeModule } from '../../challenges.module';
 
 const mockedKafkaService = {

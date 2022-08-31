@@ -1,7 +1,7 @@
-import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
-import { InMemorySubmissionRepository } from 'src/main/usecases/ports/in-memory-submission.repository';
-import { MockedCodeRepositoryUrlValidator } from 'src/main/usecases/ports/mocked-code-repository-url-validator.adapter';
-import { MockedUuidAdapter } from 'src/main/usecases/ports/mocked-uuid-adapter.adapter';
+import { InMemoryChallengeRepository } from 'src/@core/main/application/ports/in-memory-challenge.repository';
+import { InMemorySubmissionRepository } from 'src/@core/main/application/ports/in-memory-submission.repository';
+import { MockedCodeRepositoryUrlValidator } from 'src/@core/main/application/ports/mocked-code-repository-url-validator.adapter';
+import { MockedUuidAdapter } from 'src/@core/main/application/ports/mocked-uuid-adapter.adapter';
 import { ChallengeNotFoundError } from '../../errors/challenge-not-found.error';
 import { InvalidCodeRepositoryError } from '../../errors/invalid-code-repository.error';
 import { SubmitChallengeUseCase } from '../submit-challenge.usecase';
