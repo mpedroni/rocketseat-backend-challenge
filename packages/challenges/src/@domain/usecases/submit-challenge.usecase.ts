@@ -9,7 +9,7 @@ import { UseCase } from './ports/usecase.adapter';
 import { UuidAdapter } from './ports/uuid.adapter';
 
 export type SubmitChallengeUseCaseInput = {
-  challenge_id: string;
+  challengeId: string;
   repository_url: string;
 };
 
@@ -32,14 +32,14 @@ export class SubmitChallengeUseCase
   async execute(
     input: SubmitChallengeUseCaseInput,
   ): Promise<SubmitChallengeUseCaseOutput> {
-    const { challenge_id, repository_url, error } = await this.validateInput(
+    const { challengeId, repository_url, error } = await this.validateInput(
       input,
     );
 
     const status: SubmissionStatus = !!error ? 'Error' : 'Pending';
 
     const submission = await this.submissionRepository.create({
-      challenge_id,
+      challengeId,
       repository_url,
       status,
       id: this.uuid.build(),
@@ -50,7 +50,7 @@ export class SubmitChallengeUseCase
     }
 
     return {
-      challenge_id: submission.challenge_id,
+      challengeId: submission.challengeId,
       createdAt: submission.createdAt,
       grade: submission.grade,
       id: submission.id,
@@ -60,10 +60,10 @@ export class SubmitChallengeUseCase
   }
 
   private async validateInput({
-    challenge_id,
+    challengeId,
     repository_url,
   }: SubmitChallengeUseCaseInput): Promise<SubmitChallengeUseCaseValidatedInput> {
-    const challengeExists = await this.challengeRepository.exists(challenge_id);
+    const challengeExists = await this.challengeRepository.exists(challengeId);
     const isValidCodeRepositoryUrl =
       await this.codeRepositoryUrlValidator.validate(repository_url);
     let error: Error = null;
@@ -71,7 +71,7 @@ export class SubmitChallengeUseCase
     if (!isValidCodeRepositoryUrl) error = new InvalidCodeRepositoryError();
     if (!challengeExists) error = new ChallengeNotFoundError();
     return {
-      challenge_id: challengeExists ? challenge_id : null,
+      challengeId: challengeExists ? challengeId : null,
       repository_url: isValidCodeRepositoryUrl ? repository_url : null,
       error,
     };

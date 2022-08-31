@@ -40,7 +40,7 @@ async function makeSut() {
   for await (const submission of mockedSubmissions) {
     await submissionRepository.create({
       ...submission,
-      challenge_id: challenge.id,
+      challengeId: challenge.id,
     });
   }
   const sut = new ListSubmissionsUseCase(submissionRepository);
@@ -80,7 +80,7 @@ describe('ListSubmissionsUseCase', () => {
 
     const submissions = await sut.execute({
       query: {
-        challenge_id: challenge.id,
+        challengeId: challenge.id,
       },
     });
     expect(submissions.results.length).toBe(3);

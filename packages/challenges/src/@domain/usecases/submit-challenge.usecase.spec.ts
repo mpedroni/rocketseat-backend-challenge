@@ -31,13 +31,13 @@ describe('SubmitChallengeUseCase', () => {
   it("should be able to submit a Challenge and have 'Pending' as initial status", async () => {
     const { sut, challengeRepository } = makeSut();
     const input = {
-      challenge_id: 'fake-challenge-id',
+      challengeId: 'fake-challenge-id',
       repository_url: 'fake-repository-url',
     };
     await challengeRepository.create({
       description: 'Fake challenge description',
       title: 'Fake challenge title',
-      id: input.challenge_id,
+      id: input.challengeId,
     });
     const submission = await sut.execute(input);
 
@@ -51,7 +51,7 @@ describe('SubmitChallengeUseCase', () => {
     const submissionId = 'fake-submission-id';
     uuidAdapter.uuid = submissionId;
     const input = {
-      challenge_id: 'inexistent-challenge-id',
+      challengeId: 'inexistent-challenge-id',
       repository_url: 'fake-repository-url',
     };
 
@@ -75,14 +75,14 @@ describe('SubmitChallengeUseCase', () => {
     uuidAdapter.uuid = submissionId;
     codeRepositoryUrlValidator.isValid = false;
     const input = {
-      challenge_id: 'fake-challenge-id',
+      challengeId: 'fake-challenge-id',
       repository_url: 'not-valid-repository-url',
     };
 
     await challengeRepository.create({
       description: 'Fake challenge description',
       title: 'Fake challenge title',
-      id: input.challenge_id,
+      id: input.challengeId,
     });
 
     await expect(sut.execute(input)).rejects.toThrowError(

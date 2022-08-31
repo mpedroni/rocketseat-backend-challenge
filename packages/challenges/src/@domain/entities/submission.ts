@@ -2,7 +2,7 @@ export type Status = 'Pending' | 'Error' | 'Done';
 
 type SubmissionProps = {
   id: string;
-  challenge_id?: string;
+  challengeId?: string;
   repository_url: string;
   created_at: Date;
   status: Status;
@@ -21,7 +21,7 @@ export class Submission {
 
   constructor({
     id,
-    challenge_id,
+    challengeId,
     repository_url,
     created_at = new Date(),
     status = 'Pending',
@@ -29,7 +29,7 @@ export class Submission {
   }: Partial<SubmissionProps>) {
     this.props = {
       id,
-      challenge_id,
+      challengeId,
       created_at,
       repository_url,
       status,
@@ -41,8 +41,8 @@ export class Submission {
     return this.props.id;
   }
 
-  get challenge_id(): string {
-    return this.props.challenge_id;
+  get challengeId(): string {
+    return this.props.challengeId;
   }
 
   get repository_url(): string {

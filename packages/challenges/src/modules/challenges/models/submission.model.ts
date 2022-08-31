@@ -19,7 +19,7 @@ export class Submission {
   @Field({
     nullable: true,
   })
-  challenge_id?: string;
+  challengeId?: string;
 
   @Field((type) => ChallengeModel)
   challenge?: ChallengeModel;

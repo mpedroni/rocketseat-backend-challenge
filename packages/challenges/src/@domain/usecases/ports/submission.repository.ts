@@ -5,7 +5,7 @@ import {
 
 export type SubmissionCreateDto = {
   id: string;
-  challenge_id: string;
+  challengeId: string;
   repository_url: string;
   created_at?: Date;
   status?: SubmissionStatus;
@@ -25,7 +25,7 @@ export type SubmissionListFilters = {
 };
 
 export type SubmissionListQueryFilter = Partial<{
-  challenge_id: string;
+  challengeId: string;
   date: {
     start?: Date;
     end?: Date;

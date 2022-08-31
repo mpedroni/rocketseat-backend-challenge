@@ -96,14 +96,12 @@ export class ChallengeResolver {
     @Args('submitChallengeInput') submitChallengeInput: SubmitChallengeInput,
   ): Promise<Submission> {
     try {
-      const { challengeId, repositoryUrl } = submitChallengeInput;
-
-      const { challenge_id, createdAt, id, repository_url, status, grade } =
+      const { challengeId, createdAt, id, repository_url, status, grade } =
         await this.challengeService.submit({
-          challenge_id: challengeId,
-          repository_url: repositoryUrl,
+          challengeId: submitChallengeInput.challengeId,
+          repository_url: submitChallengeInput.repositoryUrl,
         });
-      const challenge = await this.challengeService.retrieve(challenge_id);
+      const challenge = await this.challengeService.retrieve(challengeId);
 
       const translatedStatus: Record<SubmissionStatus, StatusModel> = {
         Pending: StatusModel.Pending,
@@ -113,15 +111,10 @@ export class ChallengeResolver {
 
       return {
         id,
-        challenge: {
-          createdAt: challenge.createdAt,
-          description: challenge.description,
-          id: challenge.id,
-          title: challenge.title,
-        },
+        challenge,
         status: translatedStatus[status],
         createdAt,
-        challenge_id,
+        challengeId,
         grade,
         repository_url,
       };
@@ -134,7 +127,7 @@ export class ChallengeResolver {
   async submissions(
     @Args() args: ListSubmissionsArgs,
   ): Promise<ListSubmissionsOutput> {
-    const { challenge_id, date = {}, status, limit, page } = args;
+    const { challengeId, date = {}, status, limit, page } = args;
 
     const translatedStatus: Record<StatusModel, SubmissionStatus> = {
       [StatusModel.Done]: 'Done',
@@ -146,7 +139,7 @@ export class ChallengeResolver {
       page,
       limit,
       query: {
-        challenge_id,
+        challengeId,
         date,
         status: translatedStatus[status],
       },
@@ -157,7 +150,7 @@ export class ChallengeResolver {
       page: output.page,
       total: output.total,
       results: output.results.map<Submission>(
-        ({ challenge_id, createdAt, grade, id, repository_url, status }) => ({
+        ({ challengeId, createdAt, grade, id, repository_url, status }) => ({
           createdAt,
           grade,
           id,
@@ -173,7 +166,7 @@ export class ChallengeResolver {
             id: 'uuid',
             title: 'Title',
           },
-          challenge_id,
+          challengeId,
           repository_url,
         }),
       ),

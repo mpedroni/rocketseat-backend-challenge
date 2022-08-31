@@ -21,7 +21,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
 
   async create({
     id,
-    challenge_id,
+    challengeId,
     created_at,
     repository_url,
     grade,
@@ -29,7 +29,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
   }: SubmissionCreateDto): Promise<Submission> {
     const submission = new Submission({
       id,
-      challenge_id,
+      challengeId,
       created_at,
       repository_url,
       grade,
@@ -80,12 +80,12 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
   }
 
   private async filterSubmissions({
-    challenge_id,
+    challengeId,
     date = {},
     status,
   }: SubmissionListQueryFilter): Promise<Submission[]> {
     const filteredByChallenge = await this.filterSubmissionsByChallenge(
-      challenge_id,
+      challengeId,
       this.submissions,
     );
     const filteredByStatus = await this.filterSubmissionsByStatus(
@@ -101,13 +101,13 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
   }
 
   private async filterSubmissionsByChallenge(
-    challenge_id: string,
+    challengeId: string,
     submissions: Submission[],
   ): Promise<Submission[]> {
-    if (!challenge_id) return submissions;
+    if (!challengeId) return submissions;
 
     return submissions.filter(
-      (submission) => submission.challenge_id === challenge_id,
+      (submission) => submission.challengeId === challengeId,
     );
   }
 

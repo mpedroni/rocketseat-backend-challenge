@@ -11,7 +11,7 @@ type UpdateSubmissionUseCaseOutput = {
   submission_id: string;
   grade: number;
   status: SubmissionStatus;
-  challenge_id?: string;
+  challengeId?: string;
   repository_url: string;
   createdAt: Date;
 };
@@ -38,7 +38,7 @@ export class UpdateSubmissionUseCase
       repository_url: submission.repository_url,
       status: submission.status,
       submission_id: submission.id,
-      challenge_id: submission.challenge_id,
+      challengeId: submission.challengeId,
     };
   }
 }

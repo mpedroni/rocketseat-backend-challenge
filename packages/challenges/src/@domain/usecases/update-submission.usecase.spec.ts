@@ -26,7 +26,7 @@ describe('UpdateSubmissionUseCase', () => {
     const { sut, submissionRepository } = await makeSut();
     await submissionRepository.create({
       id: 'fake-submission-id',
-      challenge_id: 'fake-challenge-id',
+      challengeId: 'fake-challenge-id',
       repository_url: 'fake-repository-url',
     });
 
@@ -44,7 +44,7 @@ describe('UpdateSubmissionUseCase', () => {
     const { sut, submissionRepository } = await makeSut();
     await submissionRepository.create({
       id: 'fake-submission-id',
-      challenge_id: 'fake-challenge-id',
+      challengeId: 'fake-challenge-id',
       repository_url: 'fake-repository-url',
     });
     const input = {

@@ -22,7 +22,7 @@ export class ListSubmissionsArgs {
   limit?: number;
 
   @Field({ nullable: true })
-  challenge_id?: string;
+  challengeId?: string;
 
   @Field((type) => DateFilter, { nullable: true })
   date?: DateFilter;

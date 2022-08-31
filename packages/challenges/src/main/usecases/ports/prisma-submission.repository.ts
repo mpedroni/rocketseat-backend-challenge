@@ -15,11 +15,11 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: SubmissionCreateDto): Promise<Submission> {
-    const { id, challenge_id, repository_url, created_at, grade, status } = dto;
+    const { id, challengeId, repository_url, created_at, grade, status } = dto;
     const submission = await this.prisma.submission.create({
       data: {
         id,
-        challenge_id,
+        challengeId,
         repository_url,
         createdAt: created_at,
         grade,
@@ -44,7 +44,7 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
     });
 
     return new Submission({
-      challenge_id: submission.challenge_id,
+      challengeId: submission.challengeId,
       created_at: submission.createdAt,
       grade: submission.grade,
       id: submission.id,
@@ -55,7 +55,7 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
 
   async list(filters: SubmissionListFilters): Promise<SubmissionListOutput> {
     const { limit = 10, page = 1, query = {} } = filters;
-    const { challenge_id, date, status } = query;
+    const { challengeId, date, status } = query;
     const { start, end } = date;
     const createdAtFilter: Prisma.DateTimeFilter = {
       gte: isNaN(Number(start)) ? undefined : start,
@@ -67,7 +67,7 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
       status,
     };
 
-    if (!!challenge_id) where.challenge_id = challenge_id;
+    if (!!challengeId) where.challengeId = challengeId;
 
     const submissions = await this.prisma.submission.findMany({
       where,
