@@ -15,13 +15,13 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: SubmissionCreateDto): Promise<Submission> {
-    const { id, challengeId, repositoryUrl, created_at, grade, status } = dto;
+    const { id, challengeId, repositoryUrl, createdAt, grade, status } = dto;
     const submission = await this.prisma.submission.create({
       data: {
         id,
         challengeId,
         repositoryUrl,
-        createdAt: created_at,
+        createdAt: createdAt,
         grade,
         status,
       },
@@ -45,7 +45,7 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
 
     return new Submission({
       challengeId: submission.challengeId,
-      created_at: submission.createdAt,
+      createdAt: submission.createdAt,
       grade: submission.grade,
       id: submission.id,
       repositoryUrl: submission.repositoryUrl,
@@ -83,7 +83,7 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
       page,
       results: submissions.map(
         (submission) =>
-          new Submission({ ...submission, created_at: submission.createdAt }),
+          new Submission({ ...submission, createdAt: submission.createdAt }),
       ),
       total,
     };

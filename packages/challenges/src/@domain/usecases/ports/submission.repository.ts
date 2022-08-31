@@ -7,7 +7,7 @@ export type SubmissionCreateDto = {
   id: string;
   challengeId: string;
   repositoryUrl: string;
-  created_at?: Date;
+  createdAt?: Date;
   status?: SubmissionStatus;
   grade?: number;
 };

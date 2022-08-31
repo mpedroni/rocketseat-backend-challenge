@@ -12,18 +12,18 @@ const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const mockedSubmissions = [
   {
     id: 'fake-uuid-1',
-    created_at: new Date(Date.now() - ONE_DAY_IN_MILLISECONDS),
+    createdAt: new Date(Date.now() - ONE_DAY_IN_MILLISECONDS),
     repositoryUrl: 'fake-repository-url',
   },
   {
     id: 'fake-uuid-2',
-    created_at: new Date(Date.now() - 2 * ONE_DAY_IN_MILLISECONDS),
+    createdAt: new Date(Date.now() - 2 * ONE_DAY_IN_MILLISECONDS),
     repositoryUrl: 'fake-repository-url',
   },
   {
     id: 'fake-uuid-3',
     status: 'Done' as SubmissionStatus,
-    created_at: new Date(Date.now() - 7 * ONE_DAY_IN_MILLISECONDS),
+    createdAt: new Date(Date.now() - 7 * ONE_DAY_IN_MILLISECONDS),
     grade: 8,
     repositoryUrl: 'fake-repository-url',
   },

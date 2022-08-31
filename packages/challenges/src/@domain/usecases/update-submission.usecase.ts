@@ -3,12 +3,12 @@ import { SubmissionRepository } from './ports/submission.repository';
 import { UseCase } from './ports/usecase.adapter';
 
 type UpdateSubmissionUseCaseInput = {
-  submission_id: string;
+  submissionId: string;
   grade: number;
 };
 
 type UpdateSubmissionUseCaseOutput = {
-  submission_id: string;
+  submissionId: string;
   grade: number;
   status: SubmissionStatus;
   challengeId?: string;
@@ -24,12 +24,12 @@ export class UpdateSubmissionUseCase
 
   async execute({
     grade,
-    submission_id,
+    submissionId,
   }: UpdateSubmissionUseCaseInput): Promise<UpdateSubmissionUseCaseOutput> {
     const submission = await this.submissionRepository.update({
       grade,
       status: !!grade || grade === 0 ? 'Done' : 'Error',
-      id: submission_id,
+      id: submissionId,
     });
 
     return {
@@ -37,7 +37,7 @@ export class UpdateSubmissionUseCase
       grade: submission.grade,
       repositoryUrl: submission.repositoryUrl,
       status: submission.status,
-      submission_id: submission.id,
+      submissionId: submission.id,
       challengeId: submission.challengeId,
     };
   }

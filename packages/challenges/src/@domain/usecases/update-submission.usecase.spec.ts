@@ -31,11 +31,11 @@ describe('UpdateSubmissionUseCase', () => {
     });
 
     const input = {
-      submission_id: 'fake-submission-id',
+      submissionId: 'fake-submission-id',
       grade: 9,
     };
     await sut.execute(input);
-    const output = await submissionRepository.find(input.submission_id);
+    const output = await submissionRepository.find(input.submissionId);
     expect(output.grade).toEqual(input.grade);
     expect(output.status).toEqual('Done');
   });
@@ -48,7 +48,7 @@ describe('UpdateSubmissionUseCase', () => {
       repositoryUrl: 'fake-repository-url',
     });
     const input = {
-      submission_id: 'fake-submission-id',
+      submissionId: 'fake-submission-id',
       grade: -1,
     };
 
@@ -65,7 +65,7 @@ describe('UpdateSubmissionUseCase', () => {
   it("should throw an error if the given Submission doesn't exists", async () => {
     const { sut } = await makeSut();
     const input = {
-      submission_id: 'inexistent-submission-id',
+      submissionId: 'inexistent-submission-id',
       grade: 10,
     };
 

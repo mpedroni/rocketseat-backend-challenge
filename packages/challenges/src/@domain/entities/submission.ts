@@ -4,7 +4,7 @@ type SubmissionProps = {
   id: string;
   challengeId?: string;
   repositoryUrl: string;
-  created_at: Date;
+  createdAt: Date;
   status: Status;
   grade?: number;
 };
@@ -23,14 +23,14 @@ export class Submission {
     id,
     challengeId,
     repositoryUrl,
-    created_at = new Date(),
+    createdAt = new Date(),
     status = 'Pending',
     grade = null,
   }: Partial<SubmissionProps>) {
     this.props = {
       id,
       challengeId,
-      created_at,
+      createdAt,
       repositoryUrl,
       status,
       grade,
@@ -50,7 +50,7 @@ export class Submission {
   }
 
   get createdAt(): Date {
-    return this.props.created_at;
+    return this.props.createdAt;
   }
 
   get status(): Status {

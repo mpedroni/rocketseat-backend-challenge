@@ -81,7 +81,7 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
         const { submissionId, grade, status } = correction;
         this.updateSubmissionUseCase.execute({
           grade: status === 'Error' ? null : grade,
-          submission_id: submissionId,
+          submissionId: submissionId,
         });
       },
     });

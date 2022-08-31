@@ -22,7 +22,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
   async create({
     id,
     challengeId,
-    created_at,
+    createdAt,
     repositoryUrl,
     grade,
     status,
@@ -30,7 +30,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
     const submission = new Submission({
       id,
       challengeId,
-      created_at,
+      createdAt,
       repositoryUrl,
       grade,
       status,
