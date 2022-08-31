@@ -1,7 +1,7 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
 import { InMemorySubmissionRepository } from 'src/main/usecases/ports/in-memory-submission.repository';
 import { ListSubmissionsUseCase } from '../list-submissions.usecase';
-import { Status as SubmissionStatus } from '../../domain/entities/submission';
+import { Status as SubmissionStatus } from '../../../domain/entities/submission';
 
 jest.useFakeTimers({
   now: new Date(),

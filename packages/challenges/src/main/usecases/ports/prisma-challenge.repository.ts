@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Challenge } from 'src/@domain/domain/entities/challenge';
-import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
+import { ChallengeNotFoundError } from 'src/@domain/application/usecases/errors/challenge-not-found.error';
 import {
   ChallengeCreateDto,
   ChallengeListFilters,
   ChallengeListOutput,
   ChallengeRepository,
   ChallengeUpdateDto,
-} from 'src/@domain/usecases/ports/challenge.repository';
+} from 'src/@domain/application/usecases/ports/challenge.repository';
 import { PrismaService } from 'src/prisma.service';
 
 function handleError(error: Error): Error {

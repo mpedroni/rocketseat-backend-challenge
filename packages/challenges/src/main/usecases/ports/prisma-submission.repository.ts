@@ -7,7 +7,7 @@ import {
   SubmissionListOutput,
   SubmissionRepository,
   SubmissionUpdateDto,
-} from 'src/@domain/usecases/ports/submission.repository';
+} from 'src/@domain/application/usecases/ports/submission.repository';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()

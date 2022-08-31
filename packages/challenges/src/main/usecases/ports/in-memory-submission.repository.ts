@@ -2,7 +2,7 @@ import {
   Submission,
   Status as SubmissionStatus,
 } from 'src/@domain/domain/entities/submission';
-import { SubmissionNotFoundError } from 'src/@domain/usecases/errors/submission-not-found.error';
+import { SubmissionNotFoundError } from 'src/@domain/application/usecases/errors/submission-not-found.error';
 import {
   SubmissionCreateDto,
   SubmissionListFilters,
@@ -10,7 +10,7 @@ import {
   SubmissionListQueryFilter,
   SubmissionRepository,
   SubmissionUpdateDto,
-} from 'src/@domain/usecases/ports/submission.repository';
+} from 'src/@domain/application/usecases/ports/submission.repository';
 
 export class InMemorySubmissionRepository implements SubmissionRepository {
   private submissions: Submission[];
