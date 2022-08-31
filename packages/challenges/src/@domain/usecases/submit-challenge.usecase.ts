@@ -1,4 +1,4 @@
-import { Status as SubmissionStatus } from '../entities/submission';
+import { Status as SubmissionStatus } from '../domain/entities/submission';
 import { SubmissionDto } from './dto/submission.dto';
 import { ChallengeNotFoundError } from './errors/challenge-not-found.error';
 import { InvalidCodeRepositoryError } from './errors/invalid-code-repository.error';

@@ -1,4 +1,4 @@
-import { Status as SubmissionStatus } from '../entities/submission';
+import { Status as SubmissionStatus } from '../domain/entities/submission';
 import { SubmissionRepository } from './ports/submission.repository';
 import { UseCase } from './ports/usecase.adapter';
 

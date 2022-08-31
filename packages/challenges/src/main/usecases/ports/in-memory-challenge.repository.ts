@@ -1,4 +1,4 @@
-import { Challenge } from 'src/@domain/entities/challenge';
+import { Challenge } from 'src/@domain/domain/entities/challenge';
 import { ChallengeIdentifierCollisionError } from 'src/@domain/usecases/errors/challenge-identifier-collision.error';
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import {

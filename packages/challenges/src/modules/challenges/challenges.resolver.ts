@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { UserInputError } from 'apollo-server-express';
-import { Status as SubmissionStatus } from 'src/@domain/entities/submission';
+import { Status as SubmissionStatus } from 'src/@domain/domain/entities/submission';
 import { ChallengeNotFoundError } from 'src/@domain/usecases/errors/challenge-not-found.error';
 import { InvalidCodeRepositoryError } from 'src/@domain/usecases/errors/invalid-code-repository.error';
 import { ListSubmissionsUseCaseInput } from 'src/@domain/usecases/list-submissions.usecase';

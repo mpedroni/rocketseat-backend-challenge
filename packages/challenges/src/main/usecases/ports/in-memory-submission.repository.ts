@@ -1,7 +1,7 @@
 import {
   Submission,
   Status as SubmissionStatus,
-} from 'src/@domain/entities/submission';
+} from 'src/@domain/domain/entities/submission';
 import { SubmissionNotFoundError } from 'src/@domain/usecases/errors/submission-not-found.error';
 import {
   SubmissionCreateDto,

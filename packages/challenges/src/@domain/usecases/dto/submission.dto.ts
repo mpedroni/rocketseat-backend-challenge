@@ -1,4 +1,4 @@
-import { Status as SubmissionStatus } from 'src/@domain/entities/submission';
+import { Status as SubmissionStatus } from 'src/@domain/domain/entities/submission';
 
 export interface SubmissionDto {
   id: string;

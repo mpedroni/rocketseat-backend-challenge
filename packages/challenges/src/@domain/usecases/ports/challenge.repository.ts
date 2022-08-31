@@ -1,4 +1,4 @@
-import { Challenge } from 'src/@domain/entities/challenge';
+import { Challenge } from 'src/@domain/domain/entities/challenge';
 import { ChallengeDto } from '../dto/challenge.dto';
 
 export type ChallengeCreateDto = {

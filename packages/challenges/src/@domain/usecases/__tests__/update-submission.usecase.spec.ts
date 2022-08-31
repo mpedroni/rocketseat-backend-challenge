@@ -1,6 +1,6 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
 import { InMemorySubmissionRepository } from 'src/main/usecases/ports/in-memory-submission.repository';
-import { InvalidSubmissionGradeError } from '../../entities/submission';
+import { InvalidSubmissionGradeError } from '../../domain/entities/submission';
 import { SubmissionNotFoundError } from '../errors/submission-not-found.error';
 import { UpdateSubmissionUseCase } from '../update-submission.usecase';
 
