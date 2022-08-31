@@ -96,10 +96,10 @@ export class ChallengeResolver {
     @Args('submitChallengeInput') submitChallengeInput: SubmitChallengeInput,
   ): Promise<Submission> {
     try {
-      const { challengeId, createdAt, id, repository_url, status, grade } =
+      const { challengeId, createdAt, id, repositoryUrl, status, grade } =
         await this.challengeService.submit({
           challengeId: submitChallengeInput.challengeId,
-          repository_url: submitChallengeInput.repositoryUrl,
+          repositoryUrl: submitChallengeInput.repositoryUrl,
         });
       const challenge = await this.challengeService.retrieve(challengeId);
 
@@ -116,7 +116,7 @@ export class ChallengeResolver {
         createdAt,
         challengeId,
         grade,
-        repository_url,
+        repositoryUrl,
       };
     } catch (error) {
       handleError(error);
@@ -150,7 +150,7 @@ export class ChallengeResolver {
       page: output.page,
       total: output.total,
       results: output.results.map<Submission>(
-        ({ challengeId, createdAt, grade, id, repository_url, status }) => ({
+        ({ challengeId, createdAt, grade, id, repositoryUrl, status }) => ({
           createdAt,
           grade,
           id,
@@ -167,7 +167,7 @@ export class ChallengeResolver {
             title: 'Title',
           },
           challengeId,
-          repository_url,
+          repositoryUrl,
         }),
       ),
     };

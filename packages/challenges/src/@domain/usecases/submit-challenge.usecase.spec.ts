@@ -32,7 +32,7 @@ describe('SubmitChallengeUseCase', () => {
     const { sut, challengeRepository } = makeSut();
     const input = {
       challengeId: 'fake-challenge-id',
-      repository_url: 'fake-repository-url',
+      repositoryUrl: 'fake-repository-url',
     };
     await challengeRepository.create({
       description: 'Fake challenge description',
@@ -52,7 +52,7 @@ describe('SubmitChallengeUseCase', () => {
     uuidAdapter.uuid = submissionId;
     const input = {
       challengeId: 'inexistent-challenge-id',
-      repository_url: 'fake-repository-url',
+      repositoryUrl: 'fake-repository-url',
     };
 
     await expect(sut.execute(input)).rejects.toThrowError(
@@ -64,7 +64,7 @@ describe('SubmitChallengeUseCase', () => {
     expect(submission.grade).toEqual(null);
   });
 
-  it("should create the Submission with the 'Error' status if the given repository_url isn't a valid GitHub repository and throw an error", async () => {
+  it("should create the Submission with the 'Error' status if the given repositoryUrl isn't a valid GitHub repository and throw an error", async () => {
     const {
       sut,
       challengeRepository,
@@ -76,7 +76,7 @@ describe('SubmitChallengeUseCase', () => {
     codeRepositoryUrlValidator.isValid = false;
     const input = {
       challengeId: 'fake-challenge-id',
-      repository_url: 'not-valid-repository-url',
+      repositoryUrl: 'not-valid-repository-url',
     };
 
     await challengeRepository.create({

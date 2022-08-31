@@ -4,7 +4,7 @@ export class MockedCodeRepositoryUrlValidator
   implements CodeRepositoryUrlValidator
 {
   isValid = true;
-  async validate(repository_url: string): Promise<boolean> {
+  async validate(repositoryUrl: string): Promise<boolean> {
     return this.isValid;
   }
 }

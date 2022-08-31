@@ -1,3 +1,3 @@
 export interface CodeRepositoryUrlValidator {
-  validate(repository_url: string): Promise<boolean>;
+  validate(repositoryUrl: string): Promise<boolean>;
 }

@@ -40,7 +40,7 @@ describe('SubmitChallengeResolver (e2e)', () => {
         submitChallenge(submitChallengeInput: $input) {
           id
           challengeId
-          repository_url
+          repositoryUrl
           status
           grade
         }
@@ -63,7 +63,7 @@ describe('SubmitChallengeResolver (e2e)', () => {
     const data = body.data.submitChallenge;
     expect(data.id).toBeTruthy();
     expect(data.challengeId).toEqual(input.challengeId);
-    expect(data.repository_url).toEqual(input.repositoryUrl);
+    expect(data.repositoryUrl).toEqual(input.repositoryUrl);
     expect(data.status).toEqual('Pending');
     expect(data.grade).toEqual(null);
   });

@@ -120,10 +120,10 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
   ): Promise<SubmitChallengeUseCaseOutput> {
     const submission = await this.submitChallengeUseCase.execute(input);
     if (submission.status === 'Pending') {
-      const { repository_url, id } = submission;
+      const { repositoryUrl, id } = submission;
       this.correct({
         submissionId: id,
-        repositoryUrl: repository_url,
+        repositoryUrl: repositoryUrl,
       });
     }
 

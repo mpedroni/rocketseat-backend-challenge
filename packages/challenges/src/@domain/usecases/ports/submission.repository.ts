@@ -6,7 +6,7 @@ import {
 export type SubmissionCreateDto = {
   id: string;
   challengeId: string;
-  repository_url: string;
+  repositoryUrl: string;
   created_at?: Date;
   status?: SubmissionStatus;
   grade?: number;

@@ -27,7 +27,7 @@ export class Submission {
   @Field({
     nullable: true,
   })
-  repository_url?: string;
+  repositoryUrl?: string;
 
   @Field()
   createdAt: Date;

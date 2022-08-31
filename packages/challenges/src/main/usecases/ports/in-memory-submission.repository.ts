@@ -23,7 +23,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
     id,
     challengeId,
     created_at,
-    repository_url,
+    repositoryUrl,
     grade,
     status,
   }: SubmissionCreateDto): Promise<Submission> {
@@ -31,7 +31,7 @@ export class InMemorySubmissionRepository implements SubmissionRepository {
       id,
       challengeId,
       created_at,
-      repository_url,
+      repositoryUrl,
       grade,
       status,
     });

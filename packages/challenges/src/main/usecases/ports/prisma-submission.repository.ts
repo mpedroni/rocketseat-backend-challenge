@@ -15,12 +15,12 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: SubmissionCreateDto): Promise<Submission> {
-    const { id, challengeId, repository_url, created_at, grade, status } = dto;
+    const { id, challengeId, repositoryUrl, created_at, grade, status } = dto;
     const submission = await this.prisma.submission.create({
       data: {
         id,
         challengeId,
-        repository_url,
+        repositoryUrl,
         createdAt: created_at,
         grade,
         status,
@@ -48,7 +48,7 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
       created_at: submission.createdAt,
       grade: submission.grade,
       id: submission.id,
-      repository_url: submission.repository_url,
+      repositoryUrl: submission.repositoryUrl,
       status: submission.status,
     });
   }

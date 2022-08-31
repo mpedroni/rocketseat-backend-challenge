@@ -8,8 +8,8 @@ type RepositoryData = {
 export class GitHubCodeRepositoryUrlValidator
   implements CodeRepositoryUrlValidator
 {
-  async validate(repository_url: string): Promise<boolean> {
-    const userAndRepo = this.getUserAndRepo(repository_url);
+  async validate(repositoryUrl: string): Promise<boolean> {
+    const userAndRepo = this.getUserAndRepo(repositoryUrl);
     if (!userAndRepo) return false;
     const { user, repo } = userAndRepo;
 
@@ -17,11 +17,11 @@ export class GitHubCodeRepositoryUrlValidator
     return isReachableGitHubRepo;
   }
 
-  private getUserAndRepo(repository_url: string): RepositoryData | null {
+  private getUserAndRepo(repositoryUrl: string): RepositoryData | null {
     const githubUrlRegexPattern = new RegExp(
       /^(http(s)?:\/\/)(github\.com\/)(?<user>\w+)(\/)(?<repo>[^\s]+)(\/)?$/,
     );
-    const result = repository_url.match(githubUrlRegexPattern);
+    const result = repositoryUrl.match(githubUrlRegexPattern);
     if (!result) return null;
 
     const { repo, user } = result.groups;

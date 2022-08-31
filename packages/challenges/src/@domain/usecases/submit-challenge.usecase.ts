@@ -10,7 +10,7 @@ import { UuidAdapter } from './ports/uuid.adapter';
 
 export type SubmitChallengeUseCaseInput = {
   challengeId: string;
-  repository_url: string;
+  repositoryUrl: string;
 };
 
 export type SubmitChallengeUseCaseOutput = SubmissionDto;
@@ -32,7 +32,7 @@ export class SubmitChallengeUseCase
   async execute(
     input: SubmitChallengeUseCaseInput,
   ): Promise<SubmitChallengeUseCaseOutput> {
-    const { challengeId, repository_url, error } = await this.validateInput(
+    const { challengeId, repositoryUrl, error } = await this.validateInput(
       input,
     );
 
@@ -40,7 +40,7 @@ export class SubmitChallengeUseCase
 
     const submission = await this.submissionRepository.create({
       challengeId,
-      repository_url,
+      repositoryUrl,
       status,
       id: this.uuid.build(),
     });
@@ -54,25 +54,25 @@ export class SubmitChallengeUseCase
       createdAt: submission.createdAt,
       grade: submission.grade,
       id: submission.id,
-      repository_url: submission.repository_url,
+      repositoryUrl: submission.repositoryUrl,
       status: submission.status,
     };
   }
 
   private async validateInput({
     challengeId,
-    repository_url,
+    repositoryUrl,
   }: SubmitChallengeUseCaseInput): Promise<SubmitChallengeUseCaseValidatedInput> {
     const challengeExists = await this.challengeRepository.exists(challengeId);
     const isValidCodeRepositoryUrl =
-      await this.codeRepositoryUrlValidator.validate(repository_url);
+      await this.codeRepositoryUrlValidator.validate(repositoryUrl);
     let error: Error = null;
 
     if (!isValidCodeRepositoryUrl) error = new InvalidCodeRepositoryError();
     if (!challengeExists) error = new ChallengeNotFoundError();
     return {
       challengeId: challengeExists ? challengeId : null,
-      repository_url: isValidCodeRepositoryUrl ? repository_url : null,
+      repositoryUrl: isValidCodeRepositoryUrl ? repositoryUrl : null,
       error,
     };
   }

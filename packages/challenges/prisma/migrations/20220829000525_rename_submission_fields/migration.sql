@@ -12,7 +12,7 @@ ALTER TABLE "Submission" DROP CONSTRAINT "Submission_challengeId_fkey";
 ALTER TABLE "Submission" DROP COLUMN "challengeId",
 DROP COLUMN "repositoryUrl",
 ADD COLUMN     "challenge_id" TEXT,
-ADD COLUMN     "repository_url" TEXT;
+ADD COLUMN     "repositoryUrl" TEXT;
 
 -- AddForeignKey
 ALTER TABLE "Submission" ADD CONSTRAINT "Submission_challenge_id_fkey" FOREIGN KEY ("challenge_id") REFERENCES "Challenge"("id") ON DELETE SET NULL ON UPDATE CASCADE;

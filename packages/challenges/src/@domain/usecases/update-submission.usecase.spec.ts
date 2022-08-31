@@ -27,7 +27,7 @@ describe('UpdateSubmissionUseCase', () => {
     await submissionRepository.create({
       id: 'fake-submission-id',
       challengeId: 'fake-challenge-id',
-      repository_url: 'fake-repository-url',
+      repositoryUrl: 'fake-repository-url',
     });
 
     const input = {
@@ -45,7 +45,7 @@ describe('UpdateSubmissionUseCase', () => {
     await submissionRepository.create({
       id: 'fake-submission-id',
       challengeId: 'fake-challenge-id',
-      repository_url: 'fake-repository-url',
+      repositoryUrl: 'fake-repository-url',
     });
     const input = {
       submission_id: 'fake-submission-id',

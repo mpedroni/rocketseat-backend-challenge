@@ -3,7 +3,7 @@ export type Status = 'Pending' | 'Error' | 'Done';
 type SubmissionProps = {
   id: string;
   challengeId?: string;
-  repository_url: string;
+  repositoryUrl: string;
   created_at: Date;
   status: Status;
   grade?: number;
@@ -22,7 +22,7 @@ export class Submission {
   constructor({
     id,
     challengeId,
-    repository_url,
+    repositoryUrl,
     created_at = new Date(),
     status = 'Pending',
     grade = null,
@@ -31,7 +31,7 @@ export class Submission {
       id,
       challengeId,
       created_at,
-      repository_url,
+      repositoryUrl,
       status,
       grade,
     };
@@ -45,8 +45,8 @@ export class Submission {
     return this.props.challengeId;
   }
 
-  get repository_url(): string {
-    return this.props.repository_url;
+  get repositoryUrl(): string {
+    return this.props.repositoryUrl;
   }
 
   get createdAt(): Date {

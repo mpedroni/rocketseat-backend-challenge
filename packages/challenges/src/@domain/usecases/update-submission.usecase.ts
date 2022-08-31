@@ -12,7 +12,7 @@ type UpdateSubmissionUseCaseOutput = {
   grade: number;
   status: SubmissionStatus;
   challengeId?: string;
-  repository_url: string;
+  repositoryUrl: string;
   createdAt: Date;
 };
 
@@ -35,7 +35,7 @@ export class UpdateSubmissionUseCase
     return {
       createdAt: submission.createdAt,
       grade: submission.grade,
-      repository_url: submission.repository_url,
+      repositoryUrl: submission.repositoryUrl,
       status: submission.status,
       submission_id: submission.id,
       challengeId: submission.challengeId,
