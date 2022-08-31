@@ -63,7 +63,9 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
   ) {}
 
   async onModuleInit() {
-    this.client.subscribeToResponseOf('challenge.correction');
+    this.client.subscribeToResponseOf(
+      process.env.KAFKA_CHALLENGE_CORRECTION_TOPIC,
+    );
     await this.client.connect();
   }
 
@@ -73,7 +75,7 @@ export class ChallengeService implements OnModuleInit, OnModuleDestroy {
 
   private correct(message: CorrectLessonMessage): void {
     const observer = this.client.send<CorrectLessonResponse>(
-      'challenge.correction',
+      process.env.KAFKA_CHALLENGE_CORRECTION_TOPIC,
       message,
     );
     observer.subscribe({

@@ -28,11 +28,11 @@ import { ChallengeService } from './challenges.service';
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'challenges-service',
-            brokers: ['localhost:9092'],
+            clientId: process.env.KAFKA_CLIENT_ID || 'challenges-service',
+            brokers: [process.env.KAFKA_BROKER_URL],
           },
           consumer: {
-            groupId: 'challenge-consumer',
+            groupId: process.env.KAFKA_GROUP_ID,
           },
         },
       },

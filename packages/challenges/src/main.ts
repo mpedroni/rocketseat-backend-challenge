@@ -9,13 +9,13 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: ['localhost:9092'],
+        brokers: [process.env.KAFKA_BROKER_URL],
       },
     },
   });
 
   app.useGlobalPipes(new ValidationPipe());
   await app.startAllMicroservices();
-  await app.listen(3000);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
