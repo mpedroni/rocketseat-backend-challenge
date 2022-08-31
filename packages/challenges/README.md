@@ -22,6 +22,25 @@ Para executar a aplicação é necessário:
 - Docker Compose
 - Yarn v1.22.x
 
+## Variáveis de Ambiente
+
+Estas são as variáveis de ambiente necessárias para executar a aplicação. Crie um arquivo `.env` na raiz da aplicação com as variáveis descritas abaixo. Os valores para as variáveis do Kafka podem ser encontradas na [documentação do service Corrections](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections). As credencias do banco de dados estão descritas no arquivo [`docker-compose.yml`](https://github.com/mpedroni/rocketseat-backend-challenge/blob/main/docker-compose.yml)
+
+```env
+## APP
+PORT=3000
+
+## DATABASE
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+
+## KAFKA
+KAFKA_BROKER_URL=localhost:9092
+KAFKA_CLIENT_ID=
+KAFKA_GROUP_ID="kafka group id"
+KAFKA_CHALLENGE_CORRECTION_TOPIC="challenge correction topic"
+
+```
+
 ## Instalação
 
 ```bash
