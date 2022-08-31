@@ -76,3 +76,16 @@ $ yarn test:e2e
 # test coverage
 $ yarn test:cov
 ```
+
+## Futuras implementações e possíveis melhorias
+
+- Criar módulo do NestJS dedicado as `Submissions`
+- Separar a aplicação em pacotes, utilizando por exemplo `npm workspaces` ou `lerna`, evitando possíveis acoplamentos acidentais entre componentes
+- FetchAPI é uma feature experimental, está sendo usada para consumir uma API HTTP. Considerar substituir por outra solução, como módulo `http` do Node.js ou `axios`.
+
+## Débitos técnicos
+
+- Criar testes unitários para resolvers do GraphQL
+- Criar testes unitários para a implementação do PrismaChallengeRepository
+- Criar testes unitários para a implementação do PrismaSubmissionRepository
+- Dividir os resolvers do GraphQL e os services do módulo Challenges em múltiplos arquivos para melhor legibilidade
