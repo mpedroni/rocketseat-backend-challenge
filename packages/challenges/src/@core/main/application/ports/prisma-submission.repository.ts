@@ -21,16 +21,13 @@ export class PrismaSubmissionRepository implements SubmissionRepository {
         id,
         challengeId,
         repositoryUrl,
-        createdAt: createdAt,
+        createdAt,
         grade,
         status,
       },
     });
 
     return new Submission({ ...submission });
-  }
-  find(id: string): Promise<Submission> {
-    throw new Error('Method not implemented.');
   }
 
   async update(dto: SubmissionUpdateDto): Promise<Submission> {

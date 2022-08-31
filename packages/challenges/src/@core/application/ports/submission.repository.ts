@@ -2,15 +2,9 @@ import {
   Status as SubmissionStatus,
   Submission,
 } from 'src/@core/domain/entities/submission';
+import { SubmissionDto } from '../usecases/dto/submission.dto';
 
-export type SubmissionCreateDto = {
-  id: string;
-  challengeId: string;
-  repositoryUrl: string;
-  createdAt?: Date;
-  status?: SubmissionStatus;
-  grade?: number;
-};
+export type SubmissionCreateDto = SubmissionDto;
 
 export type SubmissionUpdateDto = {
   id: string;
@@ -42,7 +36,6 @@ export type SubmissionListOutput = {
 
 export interface SubmissionRepository {
   create(dto: SubmissionCreateDto): Promise<Submission>;
-  find(id: string): Promise<Submission>;
   update(dto: SubmissionUpdateDto): Promise<Submission>;
   list(filters: SubmissionListFilters): Promise<SubmissionListOutput>;
 }

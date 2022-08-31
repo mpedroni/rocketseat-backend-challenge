@@ -160,12 +160,6 @@ export class ChallengeResolver {
               : status === 'Error'
               ? StatusModel.Error
               : StatusModel.Pending,
-          challenge: {
-            createdAt: new Date(),
-            description: 'Description',
-            id: 'uuid',
-            title: 'Title',
-          },
           challengeId,
           repositoryUrl,
         }),

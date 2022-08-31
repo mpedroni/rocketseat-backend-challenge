@@ -27,6 +27,8 @@ describe('UpdateSubmissionUseCase', () => {
     await submissionRepository.create({
       id: 'fake-submission-id',
       challengeId: 'fake-challenge-id',
+      status: 'Pending',
+      createdAt: new Date(),
       repositoryUrl: 'fake-repository-url',
     });
 
@@ -45,6 +47,8 @@ describe('UpdateSubmissionUseCase', () => {
     await submissionRepository.create({
       id: 'fake-submission-id',
       challengeId: 'fake-challenge-id',
+      status: 'Pending',
+      createdAt: new Date(),
       repositoryUrl: 'fake-repository-url',
     });
     const input = {

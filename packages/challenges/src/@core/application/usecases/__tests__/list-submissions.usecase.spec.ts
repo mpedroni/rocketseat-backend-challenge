@@ -37,10 +37,20 @@ async function makeSut() {
     id: 'fake-challenge-id',
   });
   const submissionRepository = new InMemorySubmissionRepository();
-  for await (const submission of mockedSubmissions) {
+  for await (const {
+    id,
+    createdAt,
+    repositoryUrl,
+    grade,
+    status,
+  } of mockedSubmissions) {
     await submissionRepository.create({
-      ...submission,
+      id,
+      createdAt,
       challengeId: challenge.id,
+      repositoryUrl,
+      grade,
+      status,
     });
   }
   const sut = new ListSubmissionsUseCase(submissionRepository);

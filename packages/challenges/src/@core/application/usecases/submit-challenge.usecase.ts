@@ -42,6 +42,7 @@ export class SubmitChallengeUseCase
       challengeId,
       repositoryUrl,
       status,
+      createdAt: new Date(),
       id: this.uuid.build(),
     });
 
