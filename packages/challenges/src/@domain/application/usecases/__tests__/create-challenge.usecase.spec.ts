@@ -1,7 +1,7 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
 import { MockedUuidAdapter } from 'src/main/usecases/ports/mocked-uuid-adapter.adapter';
 import { CreateChallengeUseCase } from '../create-challenge.usecase';
-import { ChallengeIdentifierCollisionError } from '../errors/challenge-identifier-collision.error';
+import { ChallengeIdentifierCollisionError } from '../../errors/challenge-identifier-collision.error';
 
 jest.useFakeTimers({ now: new Date() });
 

@@ -2,7 +2,7 @@ import {
   Submission,
   Status as SubmissionStatus,
 } from 'src/@domain/domain/entities/submission';
-import { SubmissionNotFoundError } from 'src/@domain/application/usecases/errors/submission-not-found.error';
+import { SubmissionNotFoundError } from 'src/@domain/application/errors/submission-not-found.error';
 import {
   SubmissionCreateDto,
   SubmissionListFilters,

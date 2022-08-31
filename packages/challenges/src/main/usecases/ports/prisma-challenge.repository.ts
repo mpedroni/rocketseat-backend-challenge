@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Challenge } from 'src/@domain/domain/entities/challenge';
-import { ChallengeNotFoundError } from 'src/@domain/application/usecases/errors/challenge-not-found.error';
+import { ChallengeNotFoundError } from 'src/@domain/application/errors/challenge-not-found.error';
 import {
   ChallengeCreateDto,
   ChallengeListFilters,

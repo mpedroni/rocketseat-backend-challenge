@@ -1,6 +1,6 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
 import { Challenge } from '../../../domain/entities/challenge';
-import { ChallengeNotFoundError } from '../errors/challenge-not-found.error';
+import { ChallengeNotFoundError } from '../../errors/challenge-not-found.error';
 import { RetrieveChallengeUseCase } from '../retrieve-challenge.usecase';
 
 function makeSut() {

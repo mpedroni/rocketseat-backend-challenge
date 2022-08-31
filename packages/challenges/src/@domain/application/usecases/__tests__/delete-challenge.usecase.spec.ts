@@ -1,6 +1,6 @@
 import { InMemoryChallengeRepository } from 'src/main/usecases/ports/in-memory-challenge.repository';
 import { DeleteChallengeUseCase } from '../delete-challenge.usecase';
-import { ChallengeNotFoundError } from '../errors/challenge-not-found.error';
+import { ChallengeNotFoundError } from '../../errors/challenge-not-found.error';
 
 function makeSut() {
   const challengeRepository = new InMemoryChallengeRepository();

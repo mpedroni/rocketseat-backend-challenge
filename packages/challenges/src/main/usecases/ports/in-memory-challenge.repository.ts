@@ -1,6 +1,6 @@
 import { Challenge } from 'src/@domain/domain/entities/challenge';
-import { ChallengeIdentifierCollisionError } from 'src/@domain/application/usecases/errors/challenge-identifier-collision.error';
-import { ChallengeNotFoundError } from 'src/@domain/application/usecases/errors/challenge-not-found.error';
+import { ChallengeIdentifierCollisionError } from 'src/@domain/application/errors/challenge-identifier-collision.error';
+import { ChallengeNotFoundError } from 'src/@domain/application/errors/challenge-not-found.error';
 import {
   ChallengeCreateDto,
   ChallengeListFilters,
