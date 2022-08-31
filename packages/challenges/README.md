@@ -14,6 +14,15 @@ A aplicação vem com o [GraphQL Playground](https://www.apollographql.com/docs/
 
 O `Challenges` segue um modelo de arquitetura baseado em Clean Architecture, na qual isolamos o domínio da aplicação (como casos de uso, regras de negócio, e tudo que é relativo ao negócio da aplicação) do resto do sistema e dos detalhes de implementação, como bancos de dados e frameworks de terceiros.
 
+Todo o código relacionado a domínio (usecases, entidades, implementações...) está na pasta ``src/@core`, sendo:
+
+- `@core/domain/entities`: as entidades da aplicação (_enterprise business rules_)
+- `@core/application`
+  - `/usecases`: os usecases da aplicação (_application business rules_)
+  - `/ports`: contratos/interfaces dos gateways e adaptadores utilizados pelos usecases (_interface adapters_)
+  - `/errors`: erros conhecidos que podem ser retornados por determinado usecase
+- `@core/main`: camada mais externa que contém as implementações concretas dos contratos utilizados pelos usecases (_frameworks & drivers_)
+
 ## Requisitos
 
 Para executar a aplicação é necessário:
