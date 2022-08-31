@@ -14,6 +14,10 @@ import { SubmitChallengeInput } from './dto/submit-challenge.input';
 import { UpdateChallengeInput } from './dto/update-challenge.input';
 import { Challenge } from './models/challenge.model';
 import { Status as StatusModel, Submission } from './models/submission.model';
+import {
+  domainToGraphQLSubmissionStatus,
+  graphQlToDomainSubmissionStatus,
+} from './utils/translateSubmissionStatus';
 
 function handleError(error: Error) {
   if (
@@ -129,19 +133,13 @@ export class ChallengeResolver {
   ): Promise<ListSubmissionsOutput> {
     const { challengeId, date = {}, status, limit, page } = args;
 
-    const translatedStatus: Record<StatusModel, SubmissionStatus> = {
-      [StatusModel.Done]: 'Done',
-      [StatusModel.Error]: 'Error',
-      [StatusModel.Pending]: 'Pending',
-    };
-
     const filters: ListSubmissionsUseCaseInput = {
       page,
       limit,
       query: {
         challengeId,
         date,
-        status: translatedStatus[status],
+        status: graphQlToDomainSubmissionStatus(status),
       },
     };
     const output = await this.challengeService.listSubmissions(filters);
@@ -154,12 +152,7 @@ export class ChallengeResolver {
           createdAt,
           grade,
           id,
-          status:
-            status === 'Done'
-              ? StatusModel.Done
-              : status === 'Error'
-              ? StatusModel.Error
-              : StatusModel.Pending,
+          status: domainToGraphQLSubmissionStatus(status),
           challengeId,
           repositoryUrl,
         }),
