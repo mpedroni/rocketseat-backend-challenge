@@ -1,6 +1,6 @@
 # Challenges
 
-Este é o serviço responsável pelo gerenciamento dos desafios e das submissões de desafios para correção. É uma **API GraphQL**, desenvolvida com **NestJS** e utiliza um banco de dados **PostgresSQL** para persistência dos dados. Também possui integração com o microservice [Corrections](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections), que é o responsável por corrigir os desafios enviados pelo usuário.
+Este é o serviço responsável pelo gerenciamento dos desafios e das submissões de desafios para correção. É uma **API GraphQL**, desenvolvida com **NestJS** e utiliza um banco de dados **PostgresSQL** + **Prisma** para persistência dos dados. Também possui integração com o microservice [Corrections](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections), que é o responsável por corrigir os desafios enviados pelo usuário.
 
 É pelo `Challenges` que o usuário cadastra novos desafios e consegue submeter um desafio para correção. Essa submissão é enviada para o `Corrections` e, após corrigido, o `Challenges` recupera a submissão corrigida e a atualiza no banco de dados.
 
