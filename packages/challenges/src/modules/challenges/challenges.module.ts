@@ -15,8 +15,8 @@ import { UpdateSubmissionUseCase } from 'src/@core/application/usecases/update-s
 import { GitHubCodeRepositoryUrlValidator } from 'src/@core/main/application/ports/github-code-repository-url-validator.adapter';
 import { PrismaChallengeRepository } from 'src/@core/main/application/ports/prisma-challenge.repository';
 import { PrismaSubmissionRepository } from 'src/@core/main/application/ports/prisma-submission.repository';
-import { PrismaService } from 'src/prisma.service';
-import { UuidAdapterV4 } from 'src/uuid.service';
+import { PrismaService } from 'src/services/prisma.service';
+import { UuidAdapterV4 } from 'src/@core/main/application/ports/uuid.adapter';
 import { ChallengeResolver } from './challenges.resolver';
 import { ChallengeService } from './challenges.service';
 

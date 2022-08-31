@@ -8,7 +8,7 @@ import {
   SubmissionRepository,
   SubmissionUpdateDto,
 } from 'src/@core/application/ports/submission.repository';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from 'src/services/prisma.service';
 
 @Injectable()
 export class PrismaSubmissionRepository implements SubmissionRepository {

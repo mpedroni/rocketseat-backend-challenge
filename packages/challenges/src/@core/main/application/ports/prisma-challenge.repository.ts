@@ -9,7 +9,7 @@ import {
   ChallengeRepository,
   ChallengeUpdateDto,
 } from 'src/@core/application/ports/challenge.repository';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from 'src/services/prisma.service';
 
 function handleError(error: Error): Error {
   if (
