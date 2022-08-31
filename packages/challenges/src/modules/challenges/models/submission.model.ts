@@ -11,7 +11,7 @@ registerEnumType(Status, {
   name: 'SubmissionStatus',
 });
 
-@ObjectType({ description: 'submission' })
+@ObjectType({ description: 'Represent the Submission domain entity' })
 export class Submission {
   @Field((type) => ID)
   id: string;
