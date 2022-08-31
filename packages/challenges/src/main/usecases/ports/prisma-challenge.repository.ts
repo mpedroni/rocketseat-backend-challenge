@@ -8,7 +8,7 @@ import {
   ChallengeListOutput,
   ChallengeRepository,
   ChallengeUpdateDto,
-} from 'src/@domain/application/usecases/ports/challenge.repository';
+} from 'src/@domain/application/ports/challenge.repository';
 import { PrismaService } from 'src/prisma.service';
 
 function handleError(error: Error): Error {

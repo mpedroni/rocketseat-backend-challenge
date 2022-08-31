@@ -2,8 +2,8 @@ import {
   SubmissionListOutput,
   SubmissionListQueryFilter,
   SubmissionRepository,
-} from './ports/submission.repository';
-import { UseCase } from './ports/usecase.adapter';
+} from '../ports/submission.repository';
+import { UseCase } from '../ports/usecase.adapter';
 
 export type ListSubmissionsUseCaseInput = {
   limit?: number;

@@ -7,7 +7,7 @@ import {
   ChallengeListOutput,
   ChallengeRepository,
   ChallengeUpdateDto,
-} from 'src/@domain/application/usecases/ports/challenge.repository';
+} from 'src/@domain/application/ports/challenge.repository';
 
 export class InMemoryChallengeRepository implements ChallengeRepository {
   private challenges: Challenge[] = [];

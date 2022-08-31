@@ -1,6 +1,6 @@
 import { ChallengeDto } from './dto/challenge.dto';
-import { ChallengeRepository } from './ports/challenge.repository';
-import { UseCase } from './ports/usecase.adapter';
+import { ChallengeRepository } from '../ports/challenge.repository';
+import { UseCase } from '../ports/usecase.adapter';
 
 export type UpdateChallengeUseCaseInput = {
   id: string;

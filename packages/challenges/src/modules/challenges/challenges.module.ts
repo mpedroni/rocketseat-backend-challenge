@@ -4,10 +4,10 @@ import { CreateChallengeUseCase } from 'src/@domain/application/usecases/create-
 import { DeleteChallengeUseCase } from 'src/@domain/application/usecases/delete-challenge.usecase';
 import { ListChallengesUseCase } from 'src/@domain/application/usecases/list-challenges.usecase';
 import { ListSubmissionsUseCase } from 'src/@domain/application/usecases/list-submissions.usecase';
-import { ChallengeRepository } from 'src/@domain/application/usecases/ports/challenge.repository';
-import { CodeRepositoryUrlValidator } from 'src/@domain/application/usecases/ports/code-repository-url-validator.adapter';
-import { SubmissionRepository } from 'src/@domain/application/usecases/ports/submission.repository';
-import { UuidAdapter } from 'src/@domain/application/usecases/ports/uuid.adapter';
+import { ChallengeRepository } from 'src/@domain/application/ports/challenge.repository';
+import { CodeRepositoryUrlValidator } from 'src/@domain/application/ports/code-repository-url-validator.adapter';
+import { SubmissionRepository } from 'src/@domain/application/ports/submission.repository';
+import { UuidAdapter } from 'src/@domain/application/ports/uuid.adapter';
 import { RetrieveChallengeUseCase } from 'src/@domain/application/usecases/retrieve-challenge.usecase';
 import { SubmitChallengeUseCase } from 'src/@domain/application/usecases/submit-challenge.usecase';
 import { UpdateChallengeUseCase } from 'src/@domain/application/usecases/update-challenge.usecase';

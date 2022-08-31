@@ -10,7 +10,7 @@ import {
   SubmissionListQueryFilter,
   SubmissionRepository,
   SubmissionUpdateDto,
-} from 'src/@domain/application/usecases/ports/submission.repository';
+} from 'src/@domain/application/ports/submission.repository';
 
 export class InMemorySubmissionRepository implements SubmissionRepository {
   private submissions: Submission[];

@@ -1,8 +1,8 @@
 import {
   ChallengeListOutput,
   ChallengeRepository,
-} from './ports/challenge.repository';
-import { UseCase } from './ports/usecase.adapter';
+} from '../ports/challenge.repository';
+import { UseCase } from '../ports/usecase.adapter';
 
 export type ListChallengesUseCaseInput = {
   limit?: number;

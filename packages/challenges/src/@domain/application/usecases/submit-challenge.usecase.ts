@@ -2,11 +2,11 @@ import { Status as SubmissionStatus } from '../../domain/entities/submission';
 import { SubmissionDto } from './dto/submission.dto';
 import { ChallengeNotFoundError } from '../errors/challenge-not-found.error';
 import { InvalidCodeRepositoryError } from '../errors/invalid-code-repository.error';
-import { ChallengeRepository } from './ports/challenge.repository';
-import { CodeRepositoryUrlValidator } from './ports/code-repository-url-validator.adapter';
-import { SubmissionRepository } from './ports/submission.repository';
-import { UseCase } from './ports/usecase.adapter';
-import { UuidAdapter } from './ports/uuid.adapter';
+import { ChallengeRepository } from '../ports/challenge.repository';
+import { CodeRepositoryUrlValidator } from '../ports/code-repository-url-validator.adapter';
+import { SubmissionRepository } from '../ports/submission.repository';
+import { UseCase } from '../ports/usecase.adapter';
+import { UuidAdapter } from '../ports/uuid.adapter';
 
 export type SubmitChallengeUseCaseInput = {
   challengeId: string;
