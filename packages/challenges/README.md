@@ -63,6 +63,9 @@ $ yarn install
 Antes de executar a aplicação, é necessário subir os containers com o Docker Compose (o arquivo `docker-compose.yml` com os containers necessários já configurados pode ser encontrado na raiz do repositório) e iniciar o microservice `Corrections` (as instruções para executar o `Corrections` são descritas [em sua documentação](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections))
 
 ```bash
+# rodar as migrations no banco de dados
+$ yarn prisma migrate deploy
+
 # development
 $ yarn start
 
