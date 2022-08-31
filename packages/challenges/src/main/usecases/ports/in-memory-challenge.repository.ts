@@ -1,13 +1,13 @@
-import { Challenge } from 'src/@domain/domain/entities/challenge';
-import { ChallengeIdentifierCollisionError } from 'src/@domain/application/errors/challenge-identifier-collision.error';
-import { ChallengeNotFoundError } from 'src/@domain/application/errors/challenge-not-found.error';
+import { Challenge } from 'src/@core/domain/entities/challenge';
+import { ChallengeIdentifierCollisionError } from 'src/@core/application/errors/challenge-identifier-collision.error';
+import { ChallengeNotFoundError } from 'src/@core/application/errors/challenge-not-found.error';
 import {
   ChallengeCreateDto,
   ChallengeListFilters,
   ChallengeListOutput,
   ChallengeRepository,
   ChallengeUpdateDto,
-} from 'src/@domain/application/ports/challenge.repository';
+} from 'src/@core/application/ports/challenge.repository';
 
 export class InMemoryChallengeRepository implements ChallengeRepository {
   private challenges: Challenge[] = [];

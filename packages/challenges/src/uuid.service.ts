@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UuidAdapter } from './@domain/application/ports/uuid.adapter';
+import { UuidAdapter } from './@core/application/ports/uuid.adapter';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { UuidAdapter } from 'src/@domain/application/ports/uuid.adapter';
+import { UuidAdapter } from 'src/@core/application/ports/uuid.adapter';
 
 export class MockedUuidAdapter implements UuidAdapter {
   uuid: string;

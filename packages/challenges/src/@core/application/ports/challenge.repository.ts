@@ -1,4 +1,4 @@
-import { Challenge } from 'src/@domain/domain/entities/challenge';
+import { Challenge } from 'src/@core/domain/entities/challenge';
 import { ChallengeDto } from '../usecases/dto/challenge.dto';
 
 export type ChallengeCreateDto = {

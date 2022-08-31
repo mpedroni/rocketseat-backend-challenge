@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Submission } from 'src/@domain/domain/entities/submission';
+import { Submission } from 'src/@core/domain/entities/submission';
 import {
   SubmissionCreateDto,
   SubmissionListFilters,
   SubmissionListOutput,
   SubmissionRepository,
   SubmissionUpdateDto,
-} from 'src/@domain/application/ports/submission.repository';
+} from 'src/@core/application/ports/submission.repository';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()

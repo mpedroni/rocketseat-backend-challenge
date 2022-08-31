@@ -9,33 +9,33 @@ import {
   CreateChallengeUseCase,
   CreateChallengeUsecaseInput,
   CreateChallengeUsecaseOutput,
-} from 'src/@domain/application/usecases/create-challenge.usecase';
-import { DeleteChallengeUseCase } from 'src/@domain/application/usecases/delete-challenge.usecase';
+} from 'src/@core/application/usecases/create-challenge.usecase';
+import { DeleteChallengeUseCase } from 'src/@core/application/usecases/delete-challenge.usecase';
 import {
   ListChallengesUseCase,
   ListChallengesUseCaseInput,
   ListChallengesUseCaseOutput,
-} from 'src/@domain/application/usecases/list-challenges.usecase';
+} from 'src/@core/application/usecases/list-challenges.usecase';
 import {
   ListSubmissionsUseCase,
   ListSubmissionsUseCaseInput,
   ListSubmissionsUseCaseOutput,
-} from 'src/@domain/application/usecases/list-submissions.usecase';
+} from 'src/@core/application/usecases/list-submissions.usecase';
 import {
   RetrieveChallengeUseCase,
   RetrieveChallengeUseCaseOutput,
-} from 'src/@domain/application/usecases/retrieve-challenge.usecase';
+} from 'src/@core/application/usecases/retrieve-challenge.usecase';
 import {
   SubmitChallengeUseCase,
   SubmitChallengeUseCaseInput,
   SubmitChallengeUseCaseOutput,
-} from 'src/@domain/application/usecases/submit-challenge.usecase';
+} from 'src/@core/application/usecases/submit-challenge.usecase';
 import {
   UpdateChallengeUseCase,
   UpdateChallengeUseCaseInput,
   UpdateChallengeUseCaseOutput,
-} from 'src/@domain/application/usecases/update-challenge.usecase';
-import { UpdateSubmissionUseCase } from 'src/@domain/application/usecases/update-submission.usecase';
+} from 'src/@core/application/usecases/update-challenge.usecase';
+import { UpdateSubmissionUseCase } from 'src/@core/application/usecases/update-submission.usecase';
 
 interface CorrectLessonMessage {
   submissionId: string;

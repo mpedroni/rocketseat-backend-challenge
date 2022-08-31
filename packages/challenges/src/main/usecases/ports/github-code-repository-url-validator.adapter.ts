@@ -1,4 +1,4 @@
-import { CodeRepositoryUrlValidator } from 'src/@domain/application/ports/code-repository-url-validator.adapter';
+import { CodeRepositoryUrlValidator } from 'src/@core/application/ports/code-repository-url-validator.adapter';
 
 type RepositoryData = {
   user: string;

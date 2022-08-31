@@ -1,7 +1,7 @@
 import {
   Status as SubmissionStatus,
   Submission,
-} from 'src/@domain/domain/entities/submission';
+} from 'src/@core/domain/entities/submission';
 
 export type SubmissionCreateDto = {
   id: string;
