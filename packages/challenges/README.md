@@ -1,73 +1,59 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Challenges
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este é o serviço responsável pelo gerenciamento dos desafios e das submissões de desafios para correção. É uma **API GraphQL**, desenvolvida com **NestJS** e utiliza um banco de dados **PostgresSQL** para persistência dos dados. Também possui integração com o microservice [Corrections](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections), que é o responsável por corrigir os desafios enviados pelo usuário.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+É pelo `Challenges` que o usuário cadastra novos desafios e consegue submeter um desafio para correção. Essa submissão é enviada para o `Corrections` e, após corrigido, o `Challenges` recupera a submissão corrigida e a atualiza no banco de dados.
 
-## Description
+A integração com o `Corrections` é feita via **Apache Kafka** utilizando o modelo de mensagens [request-response](https://docs.nestjs.com/microservices/basics#request-response). Mais informações sobre a integração, como estruturas de dados e configurações do Kafka, podem ser encontradas na [documentação do microservice `Corrections`](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Documentação da API
 
-## Installation
+A aplicação vem com o [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/v2/testing/graphql-playground/) (apenas em ambiente de desenvolvimento), que é uma IDE GraphQL que pode ser usada para fazer queries. Essa IDE fica disponível em `/graphql` (por exemplo, `http://localhost:3000/graphql`) e pode ser acessada pelo navegador. No GraphQL Playground existe uma aba `DOCS` que possui todas definições de queries e mutations disponíveis na API
+
+## Sobre a arquitetura
+
+O `Challenges` segue um modelo de arquitetura baseado em Clean Architecture, na qual isolamos o domínio da aplicação (como casos de uso, regras de negócio, e tudo que é relativo ao negócio da aplicação) do resto do sistema e dos detalhes de implementação, como bancos de dados e frameworks de terceiros.
+
+## Requisitos
+
+Para executar a aplicação é necessário:
+
+- NodeJS v14.x ou superior
+- Docker Compose
+- Yarn v1.22.x
+
+## Instalação
 
 ```bash
-$ npm install
+$ yarn
+# or
+$ yarn install
 ```
 
-## Running the app
+## Executando a aplicação
+
+Antes de executar a aplicação, é necessário subir os containers com o Docker Compose (o arquivo `docker-compose.yml` com os containers necessários já configurados pode ser encontrado na raiz do repositório) e iniciar o microservice `Corrections` (as instruções para executar o `Corrections` são descritas [em sua documentação](https://github.com/mpedroni/rocketseat-backend-challenge/tree/main/packages/corrections))
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
-## Test
+## Testes
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
